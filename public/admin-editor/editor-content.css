@@ -1,0 +1,30 @@
+/* محتوای داخل iframe ویرایشگر — نزدیک به ظاهر سایت (.rich در front.css) */
+@font-face{font-family:'Vazirmatn';src:url('/fonts/vazirmatn/Vazirmatn-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+html{background:#fff}
+body.aron-content{font-family:'Vazirmatn',Tahoma,sans-serif;font-size:15.5px;line-height:2.05;color:#334155;direction:rtl;text-align:right;margin:0;padding:18px 22px}
+.aron-content>*+*{margin-top:1rem}
+.aron-content h1,.aron-content h2,.aron-content h3,.aron-content h4{color:#0f172a;font-weight:800;line-height:1.7}
+.aron-content h2{font-size:1.45rem;margin:2rem 0 .75rem}
+.aron-content h3{font-size:1.2rem;margin:1.6rem 0 .5rem}
+.aron-content h4{font-size:1.05rem}
+.aron-content a{color:#2f4ff5;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.aron-content ul{list-style:disc;padding-inline-start:1.6rem}
+.aron-content ol{list-style:decimal;padding-inline-start:1.6rem}
+.aron-content img{max-width:100%;height:auto;border-radius:12px;border:1px solid #e2e8f0}
+.aron-content figure{margin:1.5rem auto;text-align:center}
+.aron-content figcaption{font-size:.875rem;color:#64748b;margin-top:.5rem}
+.aron-content blockquote{margin:1.5rem 0;border-inline-start:4px solid #2f4ff5;background:#eef2ff99;border-radius:12px;padding:1rem 1.25rem}
+.aron-content pre{direction:ltr;text-align:left;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:1rem;font:13px/1.8 ui-monospace,Menlo,monospace;overflow:auto}
+.aron-content code{direction:ltr;unicode-bidi:isolate;background:#f1f5f9;color:#1e293b;border-radius:6px;padding:.1rem .4rem;font-size:.85em}
+.aron-content pre code{background:transparent;padding:0;color:inherit}
+.aron-content table{border-collapse:collapse;width:100%;margin:1.5rem 0}
+.aron-content th{background:#f1f5f9;font-weight:800;padding:.6rem 1rem;border:1px solid #e2e8f0}
+.aron-content td{padding:.6rem 1rem;border:1px solid #e2e8f0}
+.aron-content hr{border:0;border-top:1px solid #e2e8f0;margin:2rem 0}
+.aron-content mark{background:#fef08a;padding:0 .2rem;border-radius:4px}
+.aron-content .info-box{margin:1.5rem 0;border-inline-start:4px solid #fbbf24;background:#fffbeb;border-radius:8px;padding:1.1rem 1.25rem}
+.aron-content .highlight-box{margin:2rem 0;border:2px dashed #93c5fd;background:#eff6ff;border-radius:12px;padding:1.4rem}
+.aron-content .definition-box{margin:2rem 0;border:1px solid #c7d2fe;background:#eef2ff;border-radius:12px;padding:1.4rem}
+.aron-content .aron-embed{background:#0f172a;border-radius:12px;overflow:hidden}
+.aron-content video,.aron-content audio{max-width:100%}
+::selection{background:#c7d2fe}

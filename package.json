@@ -1,0 +1,32 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "dev:admin": "cross-env THEME=admin vite",
+        "dev:front": "cross-env THEME=front vite",
+        "dev:dashboard": "cross-env THEME=dashboard vite",
+        "build:admin": "cross-env THEME=admin vite build",
+        "build:front": "cross-env THEME=front vite build",
+        "build:dashboard": "cross-env THEME=dashboard vite build"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/vite": "^4.0.0",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.4.2",
+        "axios": "^1.11.0",
+        "concurrently": "^9.0.1",
+        "cross-env": "^10.1.0",
+        "laravel-vite-plugin": "^2.0.0",
+        "postcss": "^8.4.31",
+        "tailwindcss": "^3.1.0",
+        "vite": "^7.0.7"
+    },
+    "dependencies": {
+        "jquery": "^3.7.1",
+        "select2": "^4.1.0-rc.0"
+    }
+}

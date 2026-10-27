@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1eaff"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs><rect width="1200" height="800" fill="url(#g)"/><rect x="110" y="90" width="980" height="620" rx="22" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+<path d="M110 112a22 22 0 0 1 22-22h936a22 22 0 0 1 22 22v34H110z" fill="#f1f5f9"/>
+<circle cx="144" cy="118" r="7" fill="#fca5a5"/>
+<circle cx="168" cy="118" r="7" fill="#fcd34d"/>
+<circle cx="192" cy="118" r="7" fill="#86efac"/>
+<rect x="260" y="106" width="680" height="24" rx="12" fill="#fff"/>
+<rect x="138" y="174" width="572.88" height="508" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+<rect x="162" y="198" width="524.88" height="203.20000000000002" rx="10" fill="#7c3aed" opacity=".25"/>
+<rect x="162" y="427.20000000000005" width="524.88" height="12" rx="6" fill="#94a3b8" opacity=".55"/>
+<rect x="162" y="453.20000000000005" width="464.88" height="12" rx="6" fill="#94a3b8" opacity=".55"/>
+<rect x="162" y="479.20000000000005" width="404.88" height="12" rx="6" fill="#94a3b8" opacity=".55"/>
+<rect x="162" y="505.20000000000005" width="524.88" height="12" rx="6" fill="#94a3b8" opacity=".55"/>
+<rect x="162" y="531.2" width="464.88" height="12" rx="6" fill="#94a3b8" opacity=".55"/>
+<rect x="728.88" y="174.0" width="333.12" height="155.33333333333334" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+<rect x="744.88" y="194.0" width="271.12" height="12" rx="6" fill="#7c3aed" opacity=".8"/>
+<rect x="728.88" y="343.33333333333337" width="333.12" height="155.33333333333334" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+<rect x="744.88" y="363.33333333333337" width="271.12" height="12" rx="6" fill="#7c3aed" opacity=".8"/>
+<rect x="728.88" y="512.6666666666667" width="333.12" height="155.33333333333334" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+<rect x="744.88" y="532.6666666666667" width="271.12" height="12" rx="6" fill="#7c3aed" opacity=".8"/></svg>

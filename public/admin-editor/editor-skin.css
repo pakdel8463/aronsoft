@@ -1,0 +1,42 @@
+/* پوسته‌ی ویرایشگر (CKEditor 4 / moono-lisa) هماهنگ با پنل: آبی برند، گوشه‌های گرد، Vazirmatn، RTL */
+.aron-editor-wrap .cke_chrome{border:0!important;box-shadow:none!important;border-radius:0!important;background:#fff}
+.aron-editor-wrap .cke_top{background:#f8faff!important;border-bottom:1px solid #e7eaf4!important;padding:8px 10px 2px!important;box-shadow:none!important}
+.aron-editor-wrap .cke_toolgroup{background:#fff!important;border:1px solid #e7eaf4!important;border-radius:12px!important;box-shadow:none!important;margin:0 0 6px 6px!important;overflow:hidden}
+[dir=rtl] .aron-editor-wrap .cke_toolgroup{margin:0 0 6px 6px!important}
+.aron-editor-wrap .cke_toolbar{float:right!important;margin:0 0 0 0!important}
+.aron-editor-wrap a.cke_button{padding:6px 7px!important;border-radius:0!important;transition:background .15s}
+.aron-editor-wrap a.cke_button:hover,.aron-editor-wrap a.cke_button:focus,.aron-editor-wrap a.cke_button:active{background:#eef2ff!important;border-color:transparent!important}
+.aron-editor-wrap a.cke_button_on{background:#e0e7ff!important;box-shadow:inset 0 0 0 1px #c7d2fe!important}
+.aron-editor-wrap a.cke_button_disabled{opacity:.4}
+.aron-editor-wrap .cke_combo_button{border:0!important;border-radius:0!important;background:transparent!important;margin:0!important;padding:3px 6px!important;height:auto!important;font-family:Vazirmatn,Tahoma,sans-serif}
+.aron-editor-wrap .cke_combo_text{font-family:Vazirmatn,Tahoma,sans-serif;font-size:12.5px;font-weight:700;color:#475569;width:72px!important}
+.aron-editor-wrap .cke_combo_off a.cke_combo_button:hover{background:#eef2ff!important}
+.aron-editor-wrap .cke_toolbar_separator{background:#e7eaf4!important;margin:6px 2px!important}
+.aron-editor-wrap .cke_contents{background:#fff}
+.aron-editor-wrap .cke_bottom{background:#f8faff!important;border-top:1px solid #e7eaf4!important;box-shadow:none!important;padding:4px 10px!important}
+.aron-editor-wrap .cke_path_item,.aron-editor-wrap .cke_path_empty{font-family:Vazirmatn,sans-serif}
+.aron-editor-wrap textarea.cke_source{font:13px/1.8 ui-monospace,Menlo,monospace!important;direction:ltr;text-align:left;padding:14px!important;background:#0f172a!important;color:#e2e8f0!important}
+/* پنجره‌ها و منوها */
+.cke_dialog{font-family:Vazirmatn,Tahoma,sans-serif!important;border-radius:20px!important;overflow:hidden;border:0!important;box-shadow:0 24px 60px -20px rgb(20 26 61/.45)!important}
+.cke_dialog_contents,.cke_dialog_footer{background:#fff!important;border:0!important}
+.cke_dialog_title{background:#f8faff!important;border-bottom:1px solid #e7eaf4!important;color:#141a3d!important;font-weight:800!important;text-shadow:none!important;font-size:15px!important;padding:14px 20px!important}
+.cke_dialog_tabs{margin-top:44px!important}
+a.cke_dialog_tab{background:#f1f5f9!important;border:0!important;color:#64748b!important;border-radius:10px 10px 0 0!important;font-weight:700}
+a.cke_dialog_tab_selected{background:#fff!important;color:#2f4ff5!important}
+.cke_dialog_ui_input_text,.cke_dialog_ui_input_password,.cke_dialog_ui_input_textarea,.cke_dialog_ui_input_select{border:1px solid #e7eaf4!important;border-radius:12px!important;background:#fff!important;font-family:Vazirmatn,Tahoma,sans-serif}
+.cke_dialog_ui_input_text:focus,.cke_dialog_ui_input_select:focus{border-color:#7b8dfa!important;box-shadow:0 0 0 4px #e0e7ff}
+a.cke_dialog_ui_button{border-radius:12px!important;border:1px solid #e7eaf4!important;background:#fff!important;color:#334155!important;font-weight:700;box-shadow:none!important;text-shadow:none!important}
+a.cke_dialog_ui_button:hover{background:#eef2ff!important}
+a.cke_dialog_ui_button_ok{background:#2f4ff5!important;border-color:#2f4ff5!important;color:#fff!important}
+a.cke_dialog_ui_button_ok span{color:#fff!important;text-shadow:none!important}
+a.cke_dialog_ui_button_ok:hover{background:#2340d6!important}
+.cke_dialog_ui_labeled_label{font-weight:700;color:#334155}
+.cke_panel,.cke_menu_panel{border:1px solid #e7eaf4!important;border-radius:14px!important;box-shadow:0 18px 40px -16px rgb(20 26 61/.35)!important;overflow:hidden}
+.cke_panel_listItem a{font-family:Vazirmatn,Tahoma,sans-serif;padding:6px 10px!important}
+.cke_panel_listItem a:hover,.cke_panel_listItem a:focus{background:#eef2ff!important}
+.cke_menubutton:hover .cke_menubutton_label,.cke_menubutton:focus .cke_menubutton_label{background:#eef2ff!important}
+.cke_menubutton_label{font-family:Vazirmatn,Tahoma,sans-serif}
+/* حالت تمام‌صفحه */
+.cke_maximized{z-index:10050!important}
+.cke_maximized.cke_chrome{border-radius:0!important}
+@media (max-width:640px){.aron-editor-wrap .cke_toolgroup{margin-bottom:4px!important}.aron-editor-wrap a.cke_button{padding:5px!important}}

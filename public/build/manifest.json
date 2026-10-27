@@ -1,0 +1,71 @@
+{
+  "resources/css/admin.css": {
+    "file": "assets/admin-93b235f3.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true,
+    "name": "admin",
+    "names": [
+      "admin.css"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-iD-Em2aj.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/dashboard.css": {
+    "file": "assets/dashboard-CgWFu9Ed.css",
+    "src": "resources/css/dashboard.css",
+    "isEntry": true,
+    "name": "dashboard",
+    "names": [
+      "dashboard.css"
+    ]
+  },
+  "resources/css/fonts.css": {
+    "file": "assets/fonts-j-AhAdAe.css",
+    "src": "resources/css/fonts.css",
+    "isEntry": true,
+    "name": "fonts",
+    "names": [
+      "fonts.css"
+    ]
+  },
+  "resources/css/front.css": {
+    "file": "assets/front-8ffc7d1d.css",
+    "src": "resources/css/front.css",
+    "isEntry": true,
+    "name": "front",
+    "names": [
+      "front.css"
+    ]
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-55391bc7.js",
+    "name": "admin",
+    "src": "resources/js/admin.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CJy8ASEk.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/dashboard.js": {
+    "file": "assets/dashboard-BfiefIra.js",
+    "name": "dashboard",
+    "src": "resources/js/dashboard.js",
+    "isEntry": true
+  },
+  "resources/js/front.js": {
+    "file": "assets/front-a887ca09.js",
+    "name": "front",
+    "src": "resources/js/front.js",
+    "isEntry": true
+  }
+}

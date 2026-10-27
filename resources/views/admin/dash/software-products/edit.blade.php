@@ -1,0 +1,19 @@
+<x-admin.layout :title="'ویرایش محصول: '.$product->brand" subtitle="متن، سئو، تصویر شاخص و گالری قابل مدیریت است">
+<form action="{{ route('panel.software-products.update',$product) }}" method="POST" enctype="multipart/form-data" class="space-y-6">@csrf @method('PUT')
+@if($errors->any())<div class="rounded-xl bg-red-50 p-4 text-red-700">{{ implode(' | ',$errors->all()) }}</div>@endif
+<div class="grid gap-5 lg:grid-cols-2"><section class="space-y-4 rounded-2xl border bg-white p-6"><h2 class="text-lg font-bold">محتوای لندینگ</h2>
+@foreach(['title'=>'عنوان فارسی','brand'=>'نام برند','eyebrow'=>'برچسب بالای عنوان','subtitle'=>'تیتر تبلیغاتی','button_text'=>'متن دکمه اقدام','website_url'=>'آدرس سایت محصول','accent'=>'رنگ برند (#hex)'] as $field=>$label)<label class="block text-sm font-medium">{{ $label }}<input name="{{ $field }}" value="{{ old($field,$product->$field) }}" class="mt-1 w-full rounded-xl border border-slate-200 p-3" {{ in_array($field,['title','brand','button_text','accent'])?'required':'' }}></label>@endforeach
+<label class="block text-sm font-medium">معرفی کامل<textarea name="description" rows="6" class="mt-1 w-full rounded-xl border border-slate-200 p-3">{{ old('description',$product->description) }}</textarea></label>
+<label class="block text-sm font-medium">امکانات محصول (هر خط یک مورد)<textarea name="features_text" rows="9" class="mt-1 w-full rounded-xl border border-slate-200 p-3">{{ old('features_text',implode("
+",$product->features??[])) }}</textarea></label>
+<label class="block"><input type="checkbox" name="published" value="1" @checked(old('published',$product->published))> انتشار صفحه</label>
+<label class="block text-sm">ترتیب نمایش<input name="sort_order" type="number" min="0" value="{{ old('sort_order',$product->sort_order) }}" class="mt-1 w-full rounded-xl border p-3"></label></section>
+<section class="space-y-4 rounded-2xl border bg-white p-6"><h2 class="text-lg font-bold">تصاویر واقعی محصول</h2><p class="text-sm text-slate-500">JPG, PNG, WebP • هر فایل حداکثر ۴ مگابایت • نمایش در لندینگ بلافاصله پس از ذخیره</p>
+@if($product->cover_image)<img src="{{ asset('storage/'.$product->cover_image) }}" class="max-h-52 rounded-xl object-contain" alt="تصویر شاخص"><label class="block text-sm"><input type="checkbox" name="delete_cover" value="1"> حذف تصویر شاخص</label>@endif
+<label class="block text-sm font-medium">تصویر شاخص / اسکرین‌شات اصلی<input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" class="mt-2 block w-full rounded-lg border p-3"></label>
+<h3 class="font-bold">گالری وب و موبایل</h3><div class="grid grid-cols-2 gap-3">@foreach($product->gallery??[] as $image)<div class="rounded-xl border p-2"><img src="{{ asset('storage/'.$image) }}" class="h-32 w-full object-contain" alt="گالری"><label class="mt-2 block text-xs"><input type="checkbox" name="remove_gallery[]" value="{{ $image }}"> حذف از گالری</label></div>@endforeach</div>
+<label class="block text-sm font-medium">افزودن چند تصویر<input type="file" name="gallery_images[]" multiple accept="image/jpeg,image/png,image/webp" class="mt-2 block w-full rounded-lg border p-3"></label>
+<h2 class="pt-4 text-lg font-bold">سئو</h2><label class="block text-sm">عنوان سئو<input name="seo_title" maxlength="65" value="{{ old('seo_title',$product->seo_title) }}" class="mt-1 w-full rounded-xl border p-3"></label><label class="block text-sm">توضیحات سئو<textarea name="seo_description" maxlength="160" rows="4" class="mt-1 w-full rounded-xl border p-3">{{ old('seo_description',$product->seo_description) }}</textarea></label>
+<a href="{{ route('software-products.show',$product->slug) }}" target="_blank" rel="noopener" class="inline-block text-blue-600">پیش‌نمایش صفحه ↗</a></section></div>
+<div class="sticky bottom-3 z-20 rounded-2xl border bg-white/95 p-3 shadow-xl backdrop-blur"><button type="submit" class="rounded-xl bg-blue-600 px-7 py-3 font-bold text-white">ذخیره تغییرات</button></div>
+</form></x-admin.layout>

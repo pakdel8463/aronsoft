@@ -1,0 +1,21 @@
+/* File: resources/css/admin.css */
+
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.admin-sidebar {
+    background-color: theme('colors.darkbg.900');
+}
+body { font-family: 'Vazirmatn', sans-serif; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+.glass-header { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+/* انیمیشن نمودار */
+.bar { transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.bar:hover { filter: brightness(1.1); }

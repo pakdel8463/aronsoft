@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /panel
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /aron-captcha
+Disallow: /order/
+Disallow: /invoice/
+Disallow: /newsletter/
+
+Sitemap: https://aron-soft.com/sitemap.xml

@@ -1,0 +1,362 @@
+/*
+ * Admin panel (/panel) — Tailwind CSS v3.4. Tokens (aron/coral/mint/canvas/line/ink/rail, shadow-adm*) live in tailwind.config.js.
+ * Design: bright canvas, big-radius white cards, soft tinted shadows, brand blue, coral/mint accents, Vazirmatn, RTL.
+ * Icons: public/vendor/phosphor/phosphor-admin.css (subset, run scripts/subset-phosphor-admin.py after adding icons).
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --radius-card: 1.5rem;
+}
+
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/fonts/vazirmatn/Vazirmatn-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+    html {
+        font-family: 'Vazirmatn', ui-sans-serif, system-ui, sans-serif;
+        -webkit-tap-highlight-color: transparent;
+        scrollbar-color: #cdd3ea transparent;
+        scrollbar-width: thin;
+    }
+
+    body {
+        background: #f4f6fb;
+        color: #141a3d;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    ::selection {
+        background: #e0e7ff;
+    }
+}
+
+/* ------------------------------------------------------------ app shell */
+:root {
+    --adm-sb: 272px;
+    --adm-dir: 1;
+}
+[dir='ltr'] {
+    --adm-dir: -1;
+}
+body.adm-collapsed {
+    --adm-sb: 84px;
+}
+
+.adm-shell {
+    min-height: 100vh;
+}
+.adm-main {
+    min-width: 0;
+}
+
+.adm-sidebar {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 60;
+    display: flex;
+    width: 288px;
+    max-width: 86vw;
+    flex-direction: column;
+    background: linear-gradient(180deg, #0e1330 0%, #121846 100%);
+    color: #fff;
+    transform: translateX(calc(100% * var(--adm-dir)));
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 24px 60px -20px rgb(20 26 61 / 0.35);
+}
+body.adm-drawer-open .adm-sidebar {
+    transform: none;
+}
+.adm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgb(14 19 48 / 0.55);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+}
+body.adm-drawer-open .adm-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+body.adm-drawer-open {
+    overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+    .adm-shell {
+        display: grid;
+        grid-template-columns: var(--adm-sb) minmax(0, 1fr);
+        transition: grid-template-columns 0.25s ease;
+    }
+    .adm-sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        height: 100vh;
+        width: auto;
+        max-width: none;
+        transform: none;
+        box-shadow: none;
+    }
+    .adm-overlay {
+        display: none;
+    }
+    body.adm-collapsed .adm-sb-label,
+    body.adm-collapsed .adm-sb-heading-text,
+    body.adm-collapsed .adm-sb-badge,
+    body.adm-collapsed .adm-sb-brand-copy {
+        display: none;
+    }
+    body.adm-collapsed .adm-sb-link {
+        justify-content: center;
+        padding-inline: 0;
+    }
+    body.adm-collapsed .adm-sb-heading {
+        justify-content: center;
+    }
+    body.adm-collapsed .adm-sb-heading::before {
+        content: '';
+        display: block;
+        width: 1.25rem;
+        height: 1px;
+        background: rgb(255 255 255 / 0.14);
+    }
+    body.adm-collapsed .adm-sb-foot-copy {
+        display: none;
+    }
+}
+
+.adm-sb-nav {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.18) transparent;
+}
+.adm-sb-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.9rem;
+    padding: 0.625rem 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.62);
+    transition:
+        background-color 0.15s,
+        color 0.15s;
+}
+.adm-sb-link:hover {
+    background: rgb(255 255 255 / 0.07);
+    color: #fff;
+}
+.adm-sb-link[aria-current='page'] {
+    background: linear-gradient(135deg, rgb(79 107 248 / 0.95), rgb(47 79 245 / 0.85));
+    color: #fff;
+    box-shadow: 0 10px 22px -12px rgb(47 79 245 / 0.9);
+}
+.adm-sb-link i {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------- toasts */
+.adm-toasts {
+    position: fixed;
+    z-index: 100;
+    top: 1rem;
+    inset-inline: 1rem;
+    margin-inline: auto;
+    display: flex;
+    max-width: 26rem;
+    flex-direction: column;
+    gap: 0.6rem;
+    pointer-events: none;
+}
+@media (min-width: 640px) {
+    .adm-toasts {
+        inset-inline-end: 1.5rem;
+        inset-inline-start: auto;
+        margin-inline: 0;
+        width: 26rem;
+    }
+}
+.adm-toast {
+    pointer-events: auto;
+    animation: adm-toast-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.adm-toast.is-leaving {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: 0.25s;
+}
+@keyframes adm-toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.97);
+    }
+}
+
+/* ------------------------------------------------------ reusable pieces */
+@layer components {
+    .a-card {
+        @apply rounded-[var(--radius-card)] border border-white bg-white shadow-adm;
+    }
+    .a-card-flat {
+        @apply rounded-[var(--radius-card)] border border-line bg-white;
+    }
+    .a-soft {
+        @apply rounded-2xl bg-canvas;
+    }
+
+    /* buttons */
+    .a-btn {
+        @apply inline-flex min-h-10 select-none items-center justify-center gap-2 whitespace-nowrap rounded-2xl px-4 text-sm font-bold transition duration-150 active:scale-[.98] disabled:pointer-events-none disabled:opacity-50;
+    }
+    .a-btn-sm {
+        @apply min-h-8 rounded-xl px-3 text-xs;
+    }
+    .a-btn-lg {
+        @apply min-h-12 px-6 text-base;
+    }
+    .a-btn-primary {
+        @apply bg-aron-600 text-white shadow-adm-brand hover:-translate-y-px hover:bg-aron-700;
+    }
+    .a-btn-secondary {
+        @apply border border-line bg-white text-slate-700 hover:border-aron-200 hover:bg-aron-50 hover:text-aron-700;
+    }
+    .a-btn-soft {
+        @apply bg-aron-50 text-aron-700 hover:bg-aron-100;
+    }
+    .a-btn-danger {
+        @apply bg-coral-500 text-white hover:bg-coral-600;
+        box-shadow: 0 12px 24px -12px rgb(255 107 91 / 0.7);
+    }
+    .a-btn-danger-soft {
+        @apply bg-coral-50 text-coral-600 hover:bg-coral-100;
+    }
+    .a-btn-success {
+        @apply bg-mint-500 text-white hover:bg-mint-600;
+        box-shadow: 0 12px 24px -12px rgb(18 196 139 / 0.7);
+    }
+    .a-btn-ghost {
+        @apply text-slate-600 hover:bg-slate-100;
+    }
+    .a-btn-icon {
+        @apply size-10 min-h-0 p-0;
+    }
+    .a-btn-icon.a-btn-sm {
+        @apply size-8;
+    }
+
+    /* form controls */
+    .a-label {
+        @apply mb-1.5 block text-[13px] font-bold text-slate-700;
+    }
+    .a-input,
+    .a-select,
+    .a-textarea {
+        @apply block w-full rounded-2xl border border-line bg-white px-4 text-sm text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-aron-400 focus:ring-4 focus:ring-aron-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400;
+    }
+    .a-input,
+    .a-select {
+        @apply h-11;
+    }
+    .a-textarea {
+        @apply min-h-28 py-3 leading-7;
+    }
+    .a-select {
+        @apply cursor-pointer appearance-none bg-no-repeat pe-4 ps-10;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-position: left 0.85rem center;
+    }
+    [dir='ltr'] .a-select {
+        background-position: right 0.85rem center;
+    }
+    .a-input.has-error,
+    .a-select.has-error,
+    .a-textarea.has-error {
+        @apply border-coral-400 focus:border-coral-500 focus:ring-coral-100;
+    }
+    input[type='file'].a-input {
+        @apply h-auto cursor-pointer py-2 text-slate-500 file:me-3 file:cursor-pointer file:rounded-xl file:border-0 file:bg-aron-50 file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-aron-700 hover:file:bg-aron-100;
+    }
+    .a-check {
+        @apply size-5 shrink-0 cursor-pointer appearance-none rounded-md border border-slate-300 bg-white transition checked:border-aron-600 checked:bg-aron-600 focus:ring-4 focus:ring-aron-100;
+    }
+    .a-check:checked {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3.5 8.5 3 3 6-7'/%3E%3C/svg%3E");
+        background-size: 100%;
+    }
+    .a-check[type='radio'] {
+        @apply rounded-full;
+    }
+
+    /* toggle switch: <input type=checkbox class="a-switch"> */
+    .a-switch {
+        @apply relative h-6 w-11 shrink-0 cursor-pointer appearance-none rounded-full bg-slate-200 transition focus:ring-4 focus:ring-aron-100 checked:bg-aron-600;
+    }
+    .a-switch::after {
+        content: '';
+        @apply absolute top-0.5 size-5 rounded-full bg-white shadow transition-all;
+        inset-inline-start: 0.125rem;
+    }
+    .a-switch:checked::after {
+        inset-inline-start: 1.375rem;
+    }
+
+    /* table */
+    .a-table {
+        @apply w-full border-separate border-spacing-0 text-sm;
+    }
+    .a-table thead th {
+        @apply whitespace-nowrap bg-slate-50/80 px-4 py-3 text-start text-xs font-bold text-slate-500 first:rounded-s-2xl last:rounded-e-2xl;
+    }
+    .a-table tbody td {
+        @apply border-b border-line/70 px-4 py-3.5 align-middle text-slate-700;
+    }
+    .a-table tbody tr:last-child td {
+        @apply border-b-0;
+    }
+    .a-table tbody tr {
+        @apply transition-colors;
+    }
+    .a-table.is-hover tbody tr:hover td {
+        @apply bg-aron-50/40;
+    }
+
+    /* prose-ish text in cards */
+    .a-muted {
+        @apply text-slate-500;
+    }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    scrollbar-width: none;
+}
