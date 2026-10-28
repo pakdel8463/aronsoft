@@ -38,6 +38,9 @@ return [
         'ph-truck', 'ph-map-pin-area', 'ph-navigation-arrow', 'ph-wifi-high', 'ph-battery-charging', 'ph-flask',
         'ph-leaf', 'ph-drop', 'ph-sun', 'ph-moon', 'ph-smiley', 'ph-lightbulb',
         'ph-rocket', 'ph-crown', 'ph-diamond', 'ph-gift', 'ph-ticket', 'ph-house',
+        // page builder (aron services / tech strip)
+        'ph-atom', 'ph-cube', 'ph-git-branch', 'ph-brackets-curly', 'ph-student', 'ph-shopping-bag', 'ph-figma-logo',
+        'ph-palette', 'ph-pen-nib', 'ph-quotes', 'ph-question', 'ph-code-block', 'ph-users-four',
     ],
 
     /* دکمه‌ها و پیوندهای دانلود/ورود محصول: کلید => [برچسب پیش‌فرض، آیکن] */

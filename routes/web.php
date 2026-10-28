@@ -8,6 +8,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
@@ -105,3 +106,6 @@ Route::get('/sitemap.xml', function () {
 
     return response()->file($path, ['Content-Type' => 'application/xml; charset=UTF-8']);
 })->name('sitemap');
+
+// صفحه‌های صفحه‌ساز: /{slug}. Route::fallback همیشه آخر از همه بررسی می‌شود، پس هیچ مسیر موجودی را نمی‌پوشاند.
+Route::fallback([PageController::class, 'show'])->name('page.show');

@@ -1,0 +1,29 @@
+/* صفحه‌ساز پنل — چیدمان‌های اصلی به‌صورت CSS ساده تا به build تیلویند وابسته نباشد. */
+.pb-grid { display: grid; gap: 1.5rem; }
+@media (min-width: 1280px) {
+    .pb-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: start; }
+    .pb-grid.is-even { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .pb-sticky { position: sticky; top: 5rem; }
+}
+.pb-pressed[aria-pressed="true"] { background: #141a3d; color: #fff; }
+.pb-insert { display: none; position: absolute; inset-inline: 0; bottom: -0.75rem; z-index: 10; margin-inline: auto; width: max-content; }
+.group:hover > .pb-insert, .pb-insert:focus { display: flex; }
+.pb-off { text-decoration: line-through; }
+
+/* کتابخانه‌ی بلوک‌ها */
+.pb-lib-panel { max-width: 64rem; }
+.pb-lib-body { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+.pb-lib-nav { display: flex; gap: .25rem; overflow-x: auto; flex-shrink: 0; padding: .5rem; border-bottom: 1px solid #e7eaf4; }
+.pb-lib-items { display: grid; gap: .75rem; }
+@media (min-width: 640px) {
+    .pb-lib-body { flex-direction: row; }
+    .pb-lib-nav { flex-direction: column; width: 14rem; overflow: visible; border-bottom: 0; border-inline-end: 1px solid #e7eaf4; }
+    .pb-lib-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.pb-lib-items[hidden] { display: none; }
+
+/* انتخاب آیکن و قالب */
+.pb-icon-pop { width: 19.5rem; max-width: calc(100vw - 1.5rem); }
+.pb-icon-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .25rem; max-height: 16rem; overflow-y: auto; padding-inline-end: .25rem; }
+.pb-icon-grid [aria-pressed="true"] { background: #2f4ff5; color: #fff; }
+.pb-choice:has(:checked) { border-color: #4f6bf8; background: rgb(238 242 255 / .6); }

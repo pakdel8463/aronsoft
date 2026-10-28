@@ -224,3 +224,30 @@ Route::middleware('can:settings.contact')->group(function () {
     Route::put('settings/contact', [\App\Http\Controllers\Admin\ContactSettingsController::class, 'update'])->name('settings.contact.update');
     Route::delete('settings/contact', [\App\Http\Controllers\Admin\ContactSettingsController::class, 'reset'])->name('settings.contact.reset');
 });
+
+// ---- صفحه‌ساز: صفحه‌ها، قالب‌ها و بلوک‌ها — دسترسی: pages.manage ----
+Route::middleware('can:pages.manage')->group(function () {
+    $pages = \App\Http\Controllers\Admin\PageController::class;
+    $builder = \App\Http\Controllers\Admin\PageBuilderController::class;
+
+    Route::get('pages', [$pages, 'index'])->name('pages.index');
+    Route::post('pages', [$pages, 'store'])->name('pages.store');
+    Route::get('pages/{page}/edit', [$pages, 'edit'])->whereNumber('page')->name('pages.edit');
+    Route::put('pages/{page}', [$pages, 'update'])->whereNumber('page')->name('pages.update');
+    Route::delete('pages/{page}', [$pages, 'destroy'])->whereNumber('page')->name('pages.destroy');
+    Route::post('pages/{page}/duplicate', [$pages, 'duplicate'])->whereNumber('page')->name('pages.duplicate');
+    Route::post('pages/{page}/template', [$pages, 'saveAsTemplate'])->whereNumber('page')->name('pages.template');
+    Route::post('pages/{page}/publish', [$pages, 'togglePublish'])->whereNumber('page')->name('pages.publish');
+    Route::post('pages/{page}/home', [$pages, 'setHome'])->whereNumber('page')->name('pages.home');
+    Route::get('pages/{page}/preview', [$pages, 'preview'])->whereNumber('page')->name('pages.preview');
+
+    Route::get('pages/{page}/builder', [$builder, 'show'])->whereNumber('page')->name('pages.builder');
+    Route::post('pages/{page}/blocks', [$builder, 'store'])->whereNumber('page')->name('pages.blocks.store');
+    Route::post('pages/{page}/blocks/sort', [$builder, 'sort'])->whereNumber('page')->name('pages.blocks.sort');
+    Route::get('pages/{page}/blocks/{block}/edit', [$builder, 'edit'])->whereNumber(['page', 'block'])->name('pages.blocks.edit');
+    Route::put('pages/{page}/blocks/{block}', [$builder, 'update'])->whereNumber(['page', 'block'])->name('pages.blocks.update');
+    Route::post('pages/{page}/blocks/{block}/reset', [$builder, 'reset'])->whereNumber(['page', 'block'])->name('pages.blocks.reset');
+    Route::patch('pages/{page}/blocks/{block}/toggle', [$builder, 'toggle'])->whereNumber(['page', 'block'])->name('pages.blocks.toggle');
+    Route::post('pages/{page}/blocks/{block}/duplicate', [$builder, 'duplicate'])->whereNumber(['page', 'block'])->name('pages.blocks.duplicate');
+    Route::delete('pages/{page}/blocks/{block}', [$builder, 'destroy'])->whereNumber(['page', 'block'])->name('pages.blocks.destroy');
+});
