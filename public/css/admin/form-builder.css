@@ -1,0 +1,39 @@
+/* فرم‌ساز پنل — چیدمان با CSS ساده (بدون وابستگی به build تیلویند). */
+.fb-layout { display: grid; gap: 1.25rem; align-items: start; }
+@media (min-width: 1280px) {
+    .fb-layout { grid-template-columns: 14rem minmax(0, 1fr) 23rem; }
+    .fb-palette, .fb-settings { position: sticky; top: 5.5rem; }
+    .fb-settings { max-height: calc(100vh - 7rem); overflow-y: auto; }
+}
+.fb-palette-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .375rem; }
+@media (min-width: 1280px) { .fb-palette-grid { grid-template-columns: 1fr; } }
+
+.fb-empty { border: 2px dashed #e2e8f0; border-radius: 1rem; padding: 4rem 1rem; text-align: center; font-size: .875rem; color: #94a3b8; }
+.fb-empty[hidden] { display: none; }
+.fb-canvas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .625rem; }
+.fb-card { grid-column: span 6; position: relative; display: flex; min-width: 0; min-height: 4.25rem; cursor: pointer; align-items: center; gap: .625rem;
+    border: 1px solid #e7eaf4; border-radius: 1rem; background: rgb(248 250 252 / .6); padding: .75rem; transition: border-color .15s, box-shadow .15s; }
+.fb-card:hover { border-color: #cbd5e1; }
+.fb-card.is-selected { border-color: #4f6bf8; background: #fff; box-shadow: 0 0 0 4px #e0e7ff; }
+@media (min-width: 640px) { .fb-card.w-half { grid-column: span 3; } .fb-card.w-third { grid-column: span 2; } }
+.fb-card .fb-actions { position: absolute; top: .375rem; inset-inline-end: .375rem; display: none; gap: .125rem; border-radius: .75rem; background: rgb(255 255 255 / .96); padding: .125rem; box-shadow: 0 1px 2px rgb(0 0 0 / .06); outline: 1px solid #e7eaf4; }
+.fb-card:hover .fb-actions, .fb-card.is-selected .fb-actions { display: flex; }
+.fb-actions button { display: grid; width: 1.75rem; height: 1.75rem; place-items: center; border-radius: .5rem; color: #64748b; }
+.fb-actions button:hover { background: #e2e8f0; }
+.fb-actions button.is-danger { color: #e2483a; }
+.fb-actions button.is-danger:hover { background: #fff1ef; }
+.fb-handle { cursor: grab; color: #cbd5e1; }
+.fb-handle:hover { color: #64748b; }
+.fb-card.is-page { border-style: dashed; border-color: #a5b4fc; background: #eef2ff; color: #2340d6; font-weight: 700; font-size: .875rem; }
+.fb-logic-badge { border-radius: .375rem; background: #f5f3ff; padding: 0 .375rem; font-weight: 700; color: #6d28d9; }
+
+.fb-box { border-radius: 1rem; background: #f8fafc; padding: .75rem; }
+.fb-logic { border: 1px solid #ddd6fe; border-radius: 1rem; background: rgb(245 243 255 / .5); padding: .75rem; }
+.fb-rule { border-radius: .75rem; background: #fff; padding: .5rem; outline: 1px solid #ede9fe; }
+.fb-row { display: flex; gap: .375rem; align-items: center; }
+.fb-row > .a-input, .fb-row > .a-select { min-width: 0; }
+.fb-icon-btn { display: grid; width: 2rem; height: 2rem; flex-shrink: 0; place-items: center; border-radius: .5rem; color: #e2483a; }
+.fb-icon-btn:hover { background: #fff1ef; }
+.fb-dashed { display: flex; width: 100%; align-items: center; justify-content: center; gap: .25rem; border: 1px dashed #cbd5e1; border-radius: .75rem; padding: .5rem; font-size: .75rem; font-weight: 700; color: #475569; }
+.fb-dashed:hover { border-color: #7b8dfa; color: #2340d6; }
+.fb-small { height: 2.25rem !important; font-size: .8125rem !important; padding-block: .25rem !important; }

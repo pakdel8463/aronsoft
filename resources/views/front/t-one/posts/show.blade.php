@@ -43,7 +43,7 @@
                     <img src="{{ $img }}" alt="{{ $post->alt ?: $post->title }}" width="1200" height="675" fetchpriority="high" class="mb-8 aspect-video w-full rounded-2xl border border-slate-200 object-cover">
                 @endif
 
-                <div class="rich" data-post-body>{!! $post->body !!}</div>
+                <div class="rich" data-post-body>{!! \App\Forms\Shortcodes::render($post->body) !!}</div>
 
                 <div class="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
                     @if($post->tags->count())

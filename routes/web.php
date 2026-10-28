@@ -107,5 +107,11 @@ Route::get('/sitemap.xml', function () {
     return response()->file($path, ['Content-Type' => 'application/xml; charset=UTF-8']);
 })->name('sitemap');
 
+// فرم‌های فرم‌ساز
+Route::post('/forms/{form}', [\App\Http\Controllers\FormController::class, 'submit'])->whereNumber('form')->middleware('throttle:10,1')->name('forms.submit');
+
+// کپچای نامرئی: معمای تازه برای ویجت <x-captcha />
+Route::get('/captcha/challenge', \App\Http\Controllers\CaptchaController::class)->middleware('throttle:30,1')->name('captcha.challenge');
+
 // صفحه‌های صفحه‌ساز: /{slug}. Route::fallback همیشه آخر از همه بررسی می‌شود، پس هیچ مسیر موجودی را نمی‌پوشاند.
 Route::fallback([PageController::class, 'show'])->name('page.show');
