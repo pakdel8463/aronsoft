@@ -70,6 +70,37 @@ return [
         'defaults' => ['eyebrow' => '', 'title' => '', 'lead' => '', 'breadcrumb' => true],
     ],
 
+    'slider' => [
+        'category' => 'hero',
+        'label' => 'اسلایدر تمام‌عرض تصاویر',
+        'icon' => 'ph-slideshow',
+        'description' => 'اسلایدهای تصویر تمام‌عرض با عنوان، متن و دکمه؛ پخش خودکار، فلش و نقطه‌ها، کشیدن با انگشت.',
+        'fields' => [
+            ['key' => 'height', 'type' => 'select', 'label' => 'ارتفاع', 'options' => ['sm' => 'کوتاه', 'md' => 'متوسط', 'lg' => 'بلند', 'screen' => 'تمام صفحه'], 'default' => 'md', 'half' => true],
+            ['key' => 'overlay', 'type' => 'select', 'label' => 'تیرگی روی تصویر (خوانایی متن)', 'options' => ['none' => 'بدون', 'light' => 'کم', 'dark' => 'زیاد'], 'default' => 'light', 'half' => true],
+            ['key' => 'align', 'type' => 'select', 'label' => 'جای متن', 'options' => ['start' => 'راست', 'center' => 'وسط'], 'default' => 'start', 'half' => true],
+            ['key' => 'interval', 'type' => 'number', 'label' => 'فاصله‌ی پخش خودکار (ثانیه)', 'min' => 3, 'max' => 20, 'default' => 6, 'half' => true],
+            ['key' => 'autoplay', 'type' => 'toggle', 'label' => 'پخش خودکار', 'default' => true, 'half' => true],
+            ['key' => 'contained', 'type' => 'toggle', 'label' => 'داخل کادر عرض سایت (گوشه‌ی گرد)', 'hint' => 'خاموش = لبه‌به‌لبه‌ی صفحه', 'half' => true],
+            ['key' => 'slides', 'type' => 'repeater', 'label' => 'اسلایدها', 'item_label' => 'title', 'max_items' => 10, 'fields' => [
+                ['key' => 'image', 'type' => 'image', 'label' => 'تصویر (پیشنهاد: ۱۹۲۰×۸۰۰)'],
+                ['key' => 'eyebrow', 'type' => 'text', 'label' => 'برچسب کوچک', 'max' => 60],
+                ['key' => 'title', 'type' => 'text', 'label' => 'عنوان', 'max' => 140],
+                ['key' => 'text', 'type' => 'textarea', 'label' => 'متن', 'max' => 400],
+                ['key' => 'button_label', 'type' => 'text', 'label' => 'متن دکمه', 'max' => 40],
+                ['key' => 'button_url', 'type' => 'url', 'label' => 'لینک دکمه (یا کل اسلاید وقتی دکمه ندارد)'],
+            ]],
+        ],
+        'defaults' => [
+            'height' => 'md', 'overlay' => 'light', 'align' => 'start', 'interval' => 6, 'autoplay' => true, 'contained' => false,
+            'slides' => [
+                ['image' => '', 'eyebrow' => 'آرون‌سافت', 'title' => 'طراحی سایت و نرم‌افزار اختصاصی', 'text' => 'از ایده تا اجرا؛ سریع، امن و قابل توسعه.', 'button_label' => 'ثبت سفارش', 'button_url' => '/order'],
+                ['image' => '', 'eyebrow' => 'فروشگاه اینترنتی', 'title' => 'فروش آنلاین را جدی بگیرید', 'text' => 'درگاه پرداخت، مدیریت انبار و گزارش فروش در یک پنل.', 'button_label' => 'مشاوره‌ی رایگان', 'button_url' => '/contact'],
+                ['image' => '', 'eyebrow' => 'زیرساخت', 'title' => 'داکر، CI/CD و پشتیبانی سرور', 'text' => 'انتشار نسخه‌ی جدید در چند دقیقه، بدون قطعی.', 'button_label' => '', 'button_url' => ''],
+            ],
+        ],
+    ],
+
     /* ================================================================ محتوا */
 
     'rich_text' => [
@@ -112,6 +143,61 @@ return [
             'checklist' => ['قرارداد و پیش‌فاکتور رسمی', 'گزارش پیشرفت هفتگی', 'تحویل سورس‌کد کامل'],
             'image' => '', 'image_side' => 'end', 'alt' => false,
             'button_label' => 'درخواست مشاوره', 'button_url' => '/contact',
+        ],
+    ],
+
+    'tabs' => [
+        'category' => 'content',
+        'label' => 'تب و محتوا',
+        'icon' => 'ph-tabs',
+        'description' => 'چند تب؛ هر تب عنوان، متن، فهرست تیک‌دار، تصویر و دکمه‌ی خودش را دارد.',
+        'fields' => [
+            ...$head(),
+            ['key' => 'style', 'type' => 'select', 'label' => 'ظاهر تب‌ها', 'options' => ['pills' => 'دکمه‌ای (بالا)', 'underline' => 'خط زیر (بالا)', 'side' => 'عمودی (کنار)'], 'default' => 'pills', 'half' => true],
+            $alt,
+            ['key' => 'items', 'type' => 'repeater', 'label' => 'تب‌ها', 'item_label' => 'tab', 'max_items' => 8, 'fields' => [
+                ['key' => 'tab', 'type' => 'text', 'label' => 'عنوان تب', 'max' => 50],
+                ['key' => 'icon', 'type' => 'icon', 'label' => 'آیکن تب'],
+                ['key' => 'title', 'type' => 'text', 'label' => 'تیتر محتوا', 'max' => 160],
+                ['key' => 'text', 'type' => 'textarea', 'label' => 'متن', 'max' => 2000, 'rows' => 4],
+                ['key' => 'bullets', 'type' => 'lines', 'label' => 'فهرست تیک‌دار', 'max_items' => 8, 'max' => 140],
+                ['key' => 'image', 'type' => 'image', 'label' => 'تصویر (اختیاری)'],
+                ['key' => 'button_label', 'type' => 'text', 'label' => 'متن دکمه', 'max' => 40],
+                ['key' => 'button_url', 'type' => 'url', 'label' => 'لینک دکمه'],
+            ]],
+        ],
+        'defaults' => [
+            'eyebrow' => 'خدمات', 'title' => 'هر چیزی که برای حضور آنلاین لازم دارید', 'description' => '', 'style' => 'pills', 'alt' => false,
+            'items' => [
+                ['tab' => 'طراحی سایت', 'icon' => 'ph-globe', 'title' => 'سایت شرکتی سریع و سئو‌شده', 'text' => 'طراحی اختصاصی، ریسپانسیو و بهینه برای گوگل؛ با پنل مدیریت ساده برای به‌روزرسانی محتوا.', 'bullets' => ['طراحی رابط کاربری اختصاصی', 'سرعت بالا و Core Web Vitals سبز', 'پنل مدیریت فارسی'], 'image' => '', 'button_label' => 'ثبت سفارش', 'button_url' => '/order'],
+                ['tab' => 'فروشگاه', 'icon' => 'ph-shopping-bag', 'title' => 'فروشگاه اینترنتی کامل', 'text' => 'از کاتالوگ محصولات تا درگاه پرداخت و پیگیری سفارش.', 'bullets' => ['درگاه پرداخت و پیامک', 'مدیریت انبار', 'گزارش فروش'], 'image' => '', 'button_label' => '', 'button_url' => ''],
+                ['tab' => 'نرم‌افزار اختصاصی', 'icon' => 'ph-code', 'title' => 'سامانه‌ای مطابق فرایند کسب‌وکار شما', 'text' => 'CRM، اتوماسیون اداری، حضور و غیاب یا هر سامانه‌ی تحت وب دیگر.', 'bullets' => [], 'image' => '', 'button_label' => 'مشاوره', 'button_url' => '/contact'],
+            ],
+        ],
+    ],
+
+    'timeline' => [
+        'category' => 'content',
+        'label' => 'تایم‌لاین',
+        'icon' => 'ph-path',
+        'description' => 'رویدادها یا مراحل روی یک خط زمانی عمودی (تاریخچه، نقشه‌ی راه، روند پروژه).',
+        'fields' => [
+            ...$head(),
+            $alt,
+            ['key' => 'items', 'type' => 'repeater', 'label' => 'رویدادها', 'item_label' => 'title', 'max_items' => 20, 'fields' => [
+                ['key' => 'date', 'type' => 'text', 'label' => 'تاریخ / برچسب', 'max' => 40],
+                ['key' => 'title', 'type' => 'text', 'label' => 'عنوان', 'max' => 140],
+                ['key' => 'text', 'type' => 'textarea', 'label' => 'توضیح', 'max' => 600],
+                ['key' => 'icon', 'type' => 'icon', 'label' => 'آیکن'],
+            ]],
+        ],
+        'defaults' => [
+            'eyebrow' => 'مسیر ما', 'title' => 'از شروع تا امروز', 'description' => '', 'alt' => false,
+            'items' => [
+                ['date' => '۱۳۹۸', 'title' => 'شروع کار', 'text' => 'اولین پروژه‌های طراحی سایت برای کسب‌وکارهای کوچک.', 'icon' => 'ph-rocket-launch'],
+                ['date' => '۱۴۰۰', 'title' => 'نرم‌افزار اختصاصی', 'text' => 'توسعه‌ی سامانه‌های تحت وب و اتوماسیون برای شرکت‌ها.', 'icon' => 'ph-code'],
+                ['date' => '۱۴۰۳', 'title' => 'زیرساخت و DevOps', 'text' => 'راه‌اندازی داکر و CI/CD و پشتیبانی سرور برای مشتریان.', 'icon' => 'ph-cloud'],
+            ],
         ],
     ],
 
@@ -281,6 +367,36 @@ return [
         ],
     ],
 
+    'team' => [
+        'category' => 'social',
+        'label' => 'اعضای تیم',
+        'icon' => 'ph-users-three',
+        'description' => 'کارت اعضای تیم با عکس، سمت، توضیح کوتاه و لینک شبکه‌های اجتماعی.',
+        'fields' => [
+            ...$head(),
+            ['key' => 'columns', 'type' => 'select', 'label' => 'تعداد ستون', 'options' => ['three' => '۳ ستون', 'four' => '۴ ستون'], 'default' => 'four', 'half' => true],
+            $alt,
+            ['key' => 'items', 'type' => 'repeater', 'label' => 'اعضا', 'item_label' => 'name', 'max_items' => 24, 'fields' => [
+                ['key' => 'photo', 'type' => 'image', 'label' => 'عکس (مربعی)'],
+                ['key' => 'name', 'type' => 'text', 'label' => 'نام', 'max' => 80],
+                ['key' => 'role', 'type' => 'text', 'label' => 'سمت', 'max' => 100],
+                ['key' => 'bio', 'type' => 'textarea', 'label' => 'توضیح کوتاه', 'max' => 300],
+                ['key' => 'linkedin', 'type' => 'url', 'label' => 'لینکدین'],
+                ['key' => 'github', 'type' => 'url', 'label' => 'گیت‌هاب'],
+                ['key' => 'instagram', 'type' => 'url', 'label' => 'اینستاگرام'],
+            ]],
+        ],
+        'defaults' => [
+            'eyebrow' => 'تیم ما', 'title' => 'آدم‌های پشت پروژه‌ها', 'description' => '', 'columns' => 'four', 'alt' => false,
+            'items' => [
+                ['photo' => '', 'name' => 'نام و نام خانوادگی', 'role' => 'مدیر پروژه', 'bio' => '', 'linkedin' => '', 'github' => '', 'instagram' => ''],
+                ['photo' => '', 'name' => 'نام و نام خانوادگی', 'role' => 'توسعه‌دهنده‌ی بک‌اند', 'bio' => '', 'linkedin' => '', 'github' => '', 'instagram' => ''],
+                ['photo' => '', 'name' => 'نام و نام خانوادگی', 'role' => 'طراح رابط کاربری', 'bio' => '', 'linkedin' => '', 'github' => '', 'instagram' => ''],
+                ['photo' => '', 'name' => 'نام و نام خانوادگی', 'role' => 'توسعه‌دهنده‌ی فرانت‌اند', 'bio' => '', 'linkedin' => '', 'github' => '', 'instagram' => ''],
+            ],
+        ],
+    ],
+
     'faq' => [
         'category' => 'social',
         'label' => 'پرسش‌های متداول',
@@ -367,6 +483,40 @@ return [
         'defaults' => [
             'eyebrow' => 'وبلاگ', 'title' => 'آخرین مقالات', 'description' => '',
             'count' => 'three', 'link_label' => 'همه مقالات', 'alt' => true,
+        ],
+    ],
+
+    'card_slider' => [
+        'category' => 'dynamic',
+        'label' => 'اسلایدر کارت (خبر / مقاله)',
+        'icon' => 'ph-cards',
+        'description' => 'کارت‌های افقی قابل‌ورق‌زدن: آخرین مقالات، نمونه‌کارها یا کارت‌های دستی (خبر، رویداد، محصول).',
+        'fields' => [
+            ...$head(),
+            ['key' => 'source', 'type' => 'select', 'label' => 'منبع کارت‌ها', 'options' => ['posts' => 'آخرین مقالات وبلاگ', 'portfolio' => 'آخرین نمونه‌کارها', 'manual' => 'کارت‌های دستی (پایین)'], 'default' => 'posts', 'half' => true],
+            ['key' => 'count', 'type' => 'number', 'label' => 'حداکثر تعداد (مقالات / نمونه‌کارها)', 'min' => 3, 'max' => 16, 'default' => 8, 'half' => true],
+            ['key' => 'per_view', 'type' => 'select', 'label' => 'کارت در هر نما (دسکتاپ)', 'options' => ['two' => '۲', 'three' => '۳', 'four' => '۴'], 'default' => 'three', 'half' => true],
+            ['key' => 'link_label', 'type' => 'text', 'label' => 'متن لینک «همه»', 'hint' => 'خالی = بدون لینک', 'max' => 60, 'half' => true],
+            ['key' => 'link_url', 'type' => 'url', 'label' => 'لینک «همه» برای کارت‌های دستی', 'half' => true],
+            ['key' => 'autoplay', 'type' => 'toggle', 'label' => 'ورق خوردن خودکار', 'half' => true],
+            $alt,
+            ['key' => 'items', 'type' => 'repeater', 'label' => 'کارت‌های دستی', 'item_label' => 'title', 'max_items' => 16, 'fields' => [
+                ['key' => 'image', 'type' => 'image', 'label' => 'تصویر'],
+                ['key' => 'badge', 'type' => 'text', 'label' => 'برچسب (مثلاً «خبر»)', 'max' => 30],
+                ['key' => 'date', 'type' => 'text', 'label' => 'تاریخ', 'max' => 40],
+                ['key' => 'title', 'type' => 'text', 'label' => 'عنوان', 'max' => 160],
+                ['key' => 'text', 'type' => 'textarea', 'label' => 'خلاصه', 'max' => 300],
+                ['key' => 'url', 'type' => 'url', 'label' => 'لینک'],
+            ]],
+        ],
+        'defaults' => [
+            'eyebrow' => 'تازه‌ها', 'title' => 'اخبار و مقالات', 'description' => '',
+            'source' => 'posts', 'count' => 8, 'per_view' => 'three', 'link_label' => 'همه مطالب', 'link_url' => '', 'autoplay' => false, 'alt' => false,
+            'items' => [
+                ['image' => '', 'badge' => 'خبر', 'date' => 'مهر ۱۴۰۵', 'title' => 'عنوان خبر نمونه', 'text' => 'خلاصه‌ی کوتاه خبر در یکی دو خط.', 'url' => ''],
+                ['image' => '', 'badge' => 'رویداد', 'date' => 'آبان ۱۴۰۵', 'title' => 'عنوان رویداد نمونه', 'text' => 'خلاصه‌ی کوتاه رویداد.', 'url' => ''],
+                ['image' => '', 'badge' => 'خبر', 'date' => 'آذر ۱۴۰۵', 'title' => 'عنوان خبر دیگر', 'text' => 'خلاصه‌ی کوتاه.', 'url' => ''],
+            ],
         ],
     ],
 

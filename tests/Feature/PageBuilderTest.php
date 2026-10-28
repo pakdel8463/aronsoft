@@ -185,6 +185,51 @@ class PageBuilderTest extends TestCase
         $this->actingAs($admin)->get(route('panel.pages.blocks.edit', [$page, $other->blocks()->first()]))->assertNotFound();
     }
 
+    public function test_slider_tabs_and_card_slider_blocks(): void
+    {
+        $admin = $this->admin();
+        $page = $this->makePage(['is_active' => true], ['slider', 'tabs', 'card_slider', 'timeline', 'team']);
+        $slider = $page->blocks()->where('type', 'slider')->first();
+
+        // interval is validated, empty slides dropped, the first slide of a first block is the H1
+        $this->actingAs($admin)->put(route('panel.pages.blocks.update', [$page, $slider]), [
+            'is_active' => '1',
+            'data' => [
+                'height' => 'lg', 'overlay' => 'dark', 'align' => 'center', 'interval' => '12', 'autoplay' => '1', 'contained' => '0',
+                'slides' => [
+                    ['image' => '', 'eyebrow' => '', 'title' => 'اسلاید یک', 'text' => 'متن', 'button_label' => 'شروع', 'button_url' => '/order'],
+                    ['image' => '', 'eyebrow' => '', 'title' => '', 'text' => '', 'button_label' => '', 'button_url' => ''],
+                    ['image' => '', 'eyebrow' => '', 'title' => 'اسلاید دو', 'text' => '', 'button_label' => '', 'button_url' => '/contact'],
+                ],
+            ],
+        ])->assertRedirect()->assertSessionHasNoErrors();
+        $slider->refresh();
+        $this->assertSame(12, $slider->data['interval']);
+        $this->assertCount(2, $slider->data['slides']);
+
+        $html = $this->get('/test-page')->assertOk()
+            ->assertSee('data-autoplay="12000"', false)
+            ->assertSee('<h1 class="bk-slide-title">اسلاید یک</h1>', false)
+            ->assertSee('<h2 class="bk-slide-title">اسلاید دو</h2>', false)
+            ->assertSee('aria-label="اسلاید 2"', false)
+            ->assertSee('role="tablist"', false)
+            ->assertSee('css/blocks.css', false)
+            ->getContent();
+        // shared assets are printed once even with several interactive blocks
+        $this->assertSame(1, substr_count($html, 'js/blocks.js'));
+        // only the first tab panel is visible without interaction
+        $this->assertSame(2, substr_count($html, 'role="tabpanel"') - 1);
+
+        // card slider: manual cards, and an empty posts source is hidden from visitors
+        $cards = $page->blocks()->where('type', 'card_slider')->first();
+        $cards->update(['data' => array_merge($cards->data, ['source' => 'manual'])]);
+        $this->get('/test-page')->assertSee('عنوان خبر نمونه');
+        $cards->update(['data' => array_merge($cards->data, ['source' => 'posts'])]);
+        $this->get('/test-page')->assertDontSee('عنوان خبر نمونه')->assertDontSee('data-cards', false);
+        $this->makePost(['title' => 'مقاله‌ی اسلایدر']);
+        $this->get('/test-page')->assertSee('مقاله‌ی اسلایدر')->assertSee('data-cards', false);
+    }
+
     public function test_builder_page_can_replace_the_home_page(): void
     {
         $admin = $this->admin();
