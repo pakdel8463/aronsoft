@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use AronLabs\Captcha\Rules\CaptchaRule;
+use App\Captcha\Captcha;
 
 class NewsletterRequest extends PublicFormRequest
 {
@@ -10,14 +10,14 @@ class NewsletterRequest extends PublicFormRequest
     {
         return [
             'email' => ['required', 'email', 'max:190'],
-            'captcha' => ['required', new CaptchaRule],
+            'captcha' => Captcha::rules(),
         ];
     }
 
     public function messages(): array
     {
         return parent::messages() + [
-            'captcha.required' => 'کد امنیتی را وارد کنید.',
+            'captcha.required' => Captcha::REQUIRED_MESSAGE,
         ];
     }
 }

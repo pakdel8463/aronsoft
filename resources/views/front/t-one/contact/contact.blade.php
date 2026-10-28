@@ -107,10 +107,7 @@
                             </div>
 
                             <div>
-                                <label class="{{ $label }}">کد امنیتی <span class="text-tech-red">*</span></label>
-                                <div class="[&_.aron-captcha-field]:!mb-0 [&_.aron-captcha-field]:!flex-wrap [&_#aron-captcha-input]:!min-w-0 [&_#aron-captcha-input]:!w-full [&_#aron-captcha-input]:!rounded-xl [&_#aron-captcha-input]:!h-12 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!shrink-0 [&_img]:!rounded-xl [&_button]:!shrink-0 [&_button]:!h-12 [&_button]:!rounded-xl">
-                                    @include('aronlabs-captcha::captcha-input')
-                                </div>
+                                <x-captcha />
                                 <p class="mt-1.5 text-xs text-red-600 dark:text-red-400" data-error-for="captcha"></p>
                             </div>
 
@@ -195,7 +192,6 @@
                 var alertBox = document.getElementById('contact-alert');
                 var wrap = document.getElementById('contact-form-wrap');
                 var success = document.getElementById('contact-success');
-                var cap = document.getElementById('aron-captcha-input'); if (cap) { cap.placeholder = 'کد داخل تصویر'; cap.setAttribute('dir','ltr'); }
                 var csrf = (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
 
                 function clearErrors() {
@@ -211,12 +207,6 @@
                     btn.disabled = on;
                     spinner.classList.toggle('hidden', !on);
                     btnText.textContent = on ? 'در حال ارسال…' : 'ارسال پیام';
-                }
-                function refreshCaptcha() {
-                    var input = document.getElementById('aron-captcha-input');
-                    if (input) input.value = '';
-                    var r = document.getElementById('aron-refresh-captcha');
-                    if (r) r.click();
                 }
 
                 form.addEventListener('submit', function (e) {
@@ -237,7 +227,6 @@
                             wrap.classList.add('hidden');
                             success.classList.remove('hidden');
                             form.reset();
-                            refreshCaptcha();
                             success.scrollIntoView({behavior: 'smooth', block: 'center'});
                         } else if (r.res.status === 422 && r.data.errors) {
                             var first = null;
@@ -245,7 +234,6 @@
                                 var el = form.querySelector('[data-error-for="' + key + '"]');
                                 if (el) { el.textContent = r.data.errors[key][0]; first = first || el; }
                             });
-                            if (r.data.errors.captcha) refreshCaptcha();
                             if (first) first.scrollIntoView({behavior: 'smooth', block: 'center'});
                         } else {
                             showAlert(r.data.message || 'ارسال پیام ممکن نشد. لطفاً دوباره تلاش کنید.');

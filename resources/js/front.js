@@ -94,11 +94,9 @@
                         showMsg(msg, (r.json && r.json.message) || 'درخواست شما ثبت شد.', true);
                         form.reset();
                         if (form.hasAttribute('data-hide-on-success')) { $$('[data-form-fields]', form).forEach(function (f) { f.hidden = true; }); }
-                        refreshCaptchas(form);
                         var rid = $('[name=parent_id]', form); if (rid) rid.value = '';
                         var ri = $('[data-reply-indicator]'); if (ri) ri.hidden = true;
                     } else {
-                        refreshCaptchas(form);
                         if (r.json && r.json.errors) {
                             Object.keys(r.json.errors).forEach(function (k) {
                                 var el = form.elements[k]; if (el && el.setAttribute) el.setAttribute('aria-invalid', 'true');
@@ -262,35 +260,6 @@
         });
     }
 
-    /* ---------------------------------------------------- کپچا */
-    var capOwner = null;
-    function refreshCaptcha(field) {
-        var img = $('[data-captcha-image]', field), inp = $('[data-captcha-input]', field);
-        if (!img || !field.dataset.refreshUrl) return Promise.resolve();
-        capOwner = field;
-        return fetch(field.dataset.refreshUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }, credentials: 'same-origin' })
-            .then(function (r) { return r.json(); })
-            .then(function (j) { if (j && j.image) { img.src = j.image; if (inp) inp.value = ''; field.removeAttribute('data-lazy'); } })
-            .catch(function () {});
-    }
-    function refreshCaptchas(scope) {
-        // کد کپچا در session یکی است؛ فقط نمونه‌ی همین فرم تازه می‌شود
-        $$('[data-captcha]', scope || d).forEach(refreshCaptcha);
-    }
-    window.refreshCaptcha = function () { var f = $('[data-captcha]'); if (f) refreshCaptcha(f); };
-    function initCaptcha() {
-        var first = $('[data-captcha]'); if (first && !first.dataset.lazy) capOwner = first;
-        d.addEventListener('click', function (e) {
-            var t = e.target.closest && e.target.closest('[data-captcha-refresh], [data-captcha-image]');
-            if (!t) return;
-            e.preventDefault(); refreshCaptcha(t.closest('[data-captcha]'));
-        });
-        d.addEventListener('focusin', function (e) {
-            var f = e.target.closest && e.target.closest('[data-captcha]');
-            if (f && f !== capOwner) refreshCaptcha(f);
-        });
-    }
-
     /* ---------------------------------------------------- فهرست مطالب مقاله */
     function initToc() {
         var body = $('[data-post-body]'), box = $('[data-toc]'), list = $('[data-toc-list]');
@@ -335,7 +304,6 @@
 
     d.addEventListener('DOMContentLoaded', function () {
         initReveal();
-        initCaptcha();
         initToc();
         initReply();
         initStickyCta();

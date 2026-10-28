@@ -11,7 +11,7 @@
                 <div data-form-fields>
                     <label for="{{ $nid }}-email" class="form-label">ایمیل</label>
                     <input id="{{ $nid }}-email" type="email" name="email" required class="form-input mb-3 text-left" dir="ltr" autocomplete="email" placeholder="name@example.com">
-                    @include('aronlabs-captcha::captcha-input')
+                    <x-captcha />
                     <button type="submit" class="btn btn-primary btn-block">عضویت در خبرنامه</button>
                 </div>
                 <p data-form-msg class="form-msg" hidden aria-live="polite"></p>

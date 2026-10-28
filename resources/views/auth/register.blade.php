@@ -11,7 +11,7 @@
             @include('auth._field', ['name' => 'password', 'label' => 'رمز عبور', 'type' => 'password', 'icon' => 'lock-key', 'ac' => 'new-password', 'ltr' => true, 'placeholder' => 'حداقل ۸ کاراکتر'])
             @include('auth._field', ['name' => 'password_confirmation', 'label' => 'تکرار رمز', 'type' => 'password', 'icon' => 'lock-key', 'ac' => 'new-password', 'ltr' => true])
         </div>
-        @include('aronlabs-captcha::captcha-input')
+        <x-captcha />
         <button type="submit" class="btn btn-primary btn-lg btn-block">ایجاد حساب <i class="ph ph-arrow-left" aria-hidden="true"></i></button>
     </form>
 @endsection

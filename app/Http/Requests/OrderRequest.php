@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use AronLabs\Captcha\Rules\CaptchaRule;
+use App\Captcha\Captcha;
 use Illuminate\Validation\Rule;
 
 class OrderRequest extends PublicFormRequest
@@ -27,7 +27,7 @@ class OrderRequest extends PublicFormRequest
             'email' => ['nullable', 'email', 'max:190'],
             'contact_time' => ['nullable', 'string', Rule::in(array_keys(config('aron_services.order.contact_times')))],
             'consent' => ['accepted'],
-            'captcha' => ['required', new CaptchaRule],
+            'captcha' => Captcha::rules(),
         ];
     }
 
@@ -38,7 +38,7 @@ class OrderRequest extends PublicFormRequest
             'attachment.max' => 'حجم فایل پیوست نباید بیش از ۵ مگابایت باشد.',
             'attachment.mimes' => 'فرمت فایل پیوست مجاز نیست (PDF، Word، Excel، تصویر یا ZIP).',
             'consent.accepted' => 'برای ثبت درخواست، باید با تماس تیم آرون سافت موافقت کنید.',
-            'captcha.required' => 'کد امنیتی را وارد کنید.',
+            'captcha.required' => Captcha::REQUIRED_MESSAGE,
         ];
     }
 }

@@ -110,11 +110,14 @@
         function renew() { job = null; challenge = null; setTimeout(run, 1200); }
 
         if (form) {
-            // قبل از بقیه‌ی شنونده‌ها (مثلاً ارسال ایجکسی): اگر هنوز حل نشده، صبر کن و دوباره ارسال کن
-            form.addEventListener('submit', function (e) {
-                if (input.value) { renew(); return; }
+            // روی document در فاز capture: همیشه قبل از شنونده‌های خود فرم (مثلاً ارسال ایجکسی) اجرا می‌شود.
+            // اگر هنوز حل نشده یا جوابش منقضی شده، ارسال نگه داشته می‌شود و بعد از حل دوباره انجام می‌شود.
+            document.addEventListener('submit', function (e) {
+                if (e.target !== form) return;
+                if (input.value && challenge && !expired(challenge)) { renew(); return; }
                 e.preventDefault();
                 e.stopImmediatePropagation();
+                if (input.value) { job = null; challenge = null; }
                 var submitter = e.submitter || null;
                 run().then(function () {
                     if (typeof form.requestSubmit === 'function') form.requestSubmit(submitter && submitter.form === form ? submitter : undefined);

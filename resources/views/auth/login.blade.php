@@ -12,7 +12,7 @@
             <label class="flex min-h-[44px] cursor-pointer items-center gap-2 text-sm text-slate-700"><input type="checkbox" name="remember" value="1" class="h-5 w-5 rounded border-slate-300 text-tech-blue focus:ring-tech-blue"> مرا به خاطر بسپار</label>
             @if(Route::has('password.request'))<a href="{{ route('password.request') }}" class="inline-flex min-h-[44px] items-center text-sm font-bold text-tech-blue hover:underline">فراموشی رمز؟</a>@endif
         </div>
-        @include('aronlabs-captcha::captcha-input')
+        <x-captcha />
         <button type="submit" class="btn btn-primary btn-lg btn-block">ورود به حساب <i class="ph ph-arrow-left" aria-hidden="true"></i></button>
     </form>
 @endsection

@@ -17,6 +17,15 @@ final class Captcha
         return (bool) config('captcha.enabled', true);
     }
 
+    /** قوانین اعتبارسنجی فیلد captcha؛ وقتی کپچا خاموش است چیزی بررسی نمی‌شود. */
+    public static function rules(): array
+    {
+        return self::enabled() ? ['required', new CaptchaRule] : ['nullable'];
+    }
+
+    /** پیام فیلد خالی (وقتی فرم پیش از تمام شدن بررسی ارسال شده). */
+    public const REQUIRED_MESSAGE = 'بررسی امنیتی هنوز تمام نشده؛ چند ثانیه صبر کنید و دوباره ارسال کنید.';
+
     /** یک معمای تازه برای ویجت. */
     public static function challenge(): array
     {

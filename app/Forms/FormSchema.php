@@ -90,7 +90,7 @@ final class FormSchema
             'open_at' => '',
             'close_at' => '',
             'closed_message' => 'این فرم در حال حاضر فعال نیست.',
-            'captcha' => true,              // aronlabs captcha against spam bots
+            'captcha' => true,              // کپچای نامرئی proof-of-work (App\Captcha)
             'store_ip' => true,
             'css_class' => '',
         ];

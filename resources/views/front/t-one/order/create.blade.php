@@ -164,10 +164,7 @@
                                 </div>
 
                                 <div>
-                                    <label class="{{ $label }}">کد امنیتی <span class="text-tech-red">*</span></label>
-                                    <div class="[&_.aron-captcha-field]:!mb-0 [&_.aron-captcha-field]:!flex-wrap [&_#aron-captcha-input]:!min-w-0 [&_#aron-captcha-input]:!w-full [&_#aron-captcha-input]:!rounded-xl [&_#aron-captcha-input]:!h-12 [&_img]:!h-12 [&_img]:!w-auto [&_img]:!shrink-0 [&_img]:!rounded-xl [&_button]:!shrink-0 [&_button]:!h-12 [&_button]:!rounded-xl">
-                                        @include('aronlabs-captcha::captcha-input')
-                                    </div>
+                                    <x-captcha />
                                     <p class="{{ $err }}" data-error-for="captcha"></p>
                                 </div>
 
@@ -225,7 +222,6 @@
             (function () {
                 var form = document.getElementById('order-form');
                 if (!form) return;
-                var cap = document.getElementById('aron-captcha-input'); if (cap) { cap.placeholder = 'کد داخل تصویر'; cap.setAttribute('dir','ltr'); }
                 var csrf = (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
                 var panels = [].slice.call(form.querySelectorAll('[data-step]'));
                 var inds = [].slice.call(document.querySelectorAll('[data-step-ind]'));
@@ -320,7 +316,6 @@
                         var m = digits(form.mobile.value).replace(/[\s\-()]/g, '');
                         if (!/^(\+98|0098|98|0)?9\d{9}$/.test(m)) { setError('mobile', 'شماره موبایل معتبر نیست (مثال: ۰۹۱۲۱۲۳۴۵۶۷).'); ok = false; }
                         if (form.email.value && !/^\S+@\S+\.\S+$/.test(form.email.value)) { setError('email', 'ایمیل معتبر نیست.'); ok = false; }
-                        if (!document.getElementById('aron-captcha-input').value.trim()) { setError('captcha', 'کد امنیتی را وارد کنید.'); ok = false; }
                         if (!form.consent.checked) { setError('consent', 'برای ثبت درخواست باید با تماس تیم آرون‌سافت موافقت کنید.'); ok = false; }
                     }
                     return ok;
@@ -346,10 +341,6 @@
                     if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && step < 3) { e.preventDefault(); btnNext.click(); }
                 });
 
-                function refreshCaptcha() {
-                    var i = document.getElementById('aron-captcha-input'); if (i) i.value = '';
-                    var r = document.getElementById('aron-refresh-captcha'); if (r) r.click();
-                }
                 function loading(on) {
                     btnSubmit.disabled = on;
                     document.getElementById('submit-spinner').classList.toggle('hidden', !on);
@@ -382,11 +373,9 @@
                                 setError(base, r.data.errors[key][0]);
                                 minStep = Math.min(minStep, fieldStep[base] || 3);
                             });
-                            if (r.data.errors.captcha) refreshCaptcha();
                             go(minStep);
                         } else {
                             showAlert(r.data.message || 'ثبت درخواست ممکن نشد. لطفاً دوباره تلاش کنید.');
-                            refreshCaptcha();
                         }
                     }).catch(function () {
                         loading(false);

@@ -74,9 +74,9 @@ class PublishedScopingTest extends TestCase
     {
         $draft = $this->makePost(['status' => 'draft']);
 
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('comments.store', $draft->slug), [
-                'body' => 'hello there', 'name' => 'A', 'email' => 'a@b.co', 'captcha' => 'abc12',
+                'body' => 'hello there', 'name' => 'A', 'email' => 'a@b.co', 'captcha' => $this->captcha(),
             ])->assertNotFound();
     }
 }

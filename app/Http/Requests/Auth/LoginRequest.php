@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
-use AronLabs\Captcha\Rules\CaptchaRule;
+use App\Captcha\Captcha;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +30,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
-            'captcha' => ['required', new CaptchaRule],
+            'captcha' => Captcha::rules(),
         ];
     }
 
