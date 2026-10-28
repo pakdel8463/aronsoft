@@ -83,7 +83,8 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'store'])->mi
 Route::get('/newsletter/confirm/{token}', [NewsletterController::class, 'confirm'])->middleware('throttle:20,1')->name('newsletter.confirm');
 Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->middleware('throttle:20,1')->name('newsletter.unsubscribe');
 
-Route::group(['prefix' => 'panel/laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+// File manager: panel users only (plain 'auth' let any registered customer upload files)
+Route::group(['prefix' => 'panel/laravel-filemanager', 'middleware' => ['web', 'auth', 'admin.access']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 

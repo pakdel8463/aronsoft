@@ -7,7 +7,7 @@
 
 
 .admin-sidebar {
-    background-color: theme('colors.darkbg.900');
+    background-color: #18181b; /* darkbg-900 (only defined in the front Tailwind config) */
 }
 body { font-family: 'Vazirmatn', sans-serif; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }

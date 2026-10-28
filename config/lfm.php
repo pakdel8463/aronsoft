@@ -18,7 +18,7 @@ return [
     'use_package_routes'       => false,
 
     //Middlewares to be applied to default routes when use_package_routes is true
-    'middlewares'              => ['web','auth'],
+    'middlewares'              => ['web', 'auth', 'admin.access'],
 
     //The url prefix to this package.
     'url_prefix'               => 'panel/filemanager',
@@ -100,7 +100,9 @@ return [
     |--------------------------------------------------------------------------
      */
 
-    'disk'                     => 'public_html',
+    // storage/app/public (served at /storage via `php artisan storage:link`) is persistent in the
+    // Docker setup; the old public_html/ folder from shared hosting is neither served nor kept.
+    'disk'                     => env('LFM_DISK', 'public'),
 
     'temporary_url_duration'   => 30,
 

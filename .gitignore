@@ -28,3 +28,6 @@ yarn-error.log
 
 # One-off patch / installer archives
 /*.zip
+
+# Generated at runtime by /sitemap.xml and `php artisan sitemap:generate`
+/public/sitemap.xml
