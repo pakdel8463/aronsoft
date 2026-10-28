@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use AronLabs\Captcha\Rules\CaptchaRule;
+use App\Captcha\Captcha;
 use Illuminate\Validation\Rule;
 
 class ContactRequest extends PublicFormRequest
@@ -16,7 +16,7 @@ class ContactRequest extends PublicFormRequest
             'subject' => ['nullable', 'string', Rule::in(config('aron_services.contact_subjects'))],
             'budget' => ['nullable', 'string', 'max:100'],
             'message' => ['required', 'string', 'min:10', 'max:3000'],
-            'captcha' => ['required', new CaptchaRule],
+            'captcha' => Captcha::rules(),
         ];
     }
 
@@ -24,7 +24,7 @@ class ContactRequest extends PublicFormRequest
     {
         return parent::messages() + [
             'message.min' => 'پیام شما کوتاه است؛ لطفاً حداقل ۱۰ نویسه بنویسید.',
-            'captcha.required' => 'کد امنیتی را وارد کنید.',
+            'captcha.required' => Captcha::REQUIRED_MESSAGE,
         ];
     }
 }

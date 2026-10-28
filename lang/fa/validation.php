@@ -152,8 +152,8 @@ return [
     'uuid' => ':attribute باید یک UUID معتبر باشد.',
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'captcha' => [
+            'required' => 'بررسی امنیتی هنوز تمام نشده؛ چند ثانیه صبر کنید و دوباره ارسال کنید.',
         ],
     ],
 
@@ -164,7 +164,7 @@ return [
         'email' => 'ایمیل',
         'subject' => 'موضوع',
         'message' => 'پیام',
-        'captcha' => 'کد امنیتی',
+        'captcha' => 'بررسی امنیتی',
         'password' => 'گذرواژه',
         'password_confirmation' => 'تکرار گذرواژه',
         'current_password' => 'گذرواژه فعلی',

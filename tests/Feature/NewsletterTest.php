@@ -14,8 +14,8 @@ class NewsletterTest extends TestCase
 
     private function subscribe(string $email = 'Reader@Example.com')
     {
-        return $this->withSession($this->captcha())
-            ->postJson(route('newsletter.subscribe'), ['email' => $email, 'captcha' => 'abc12']);
+        return $this
+            ->postJson(route('newsletter.subscribe'), ['email' => $email, 'captcha' => $this->captcha()]);
     }
 
     public function test_subscribe_creates_inactive_row_and_sends_confirmation(): void
@@ -81,7 +81,7 @@ class NewsletterTest extends TestCase
 
     public function test_captcha_and_email_are_validated(): void
     {
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('newsletter.subscribe'), ['email' => 'bad', 'captcha' => 'zzz'])
             ->assertStatus(422)->assertJsonValidationErrors(['email', 'captcha']);
     }

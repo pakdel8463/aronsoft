@@ -79,7 +79,7 @@
                                         </div>
                                     @endguest
                                     <div><label for="c-body" class="form-label">دیدگاه شما <span class="text-red-600" aria-hidden="true">*</span></label><textarea id="c-body" name="body" rows="4" required minlength="5" maxlength="3000" class="form-input"></textarea></div>
-                                    @include('aronlabs-captcha::captcha-input')
+                                    <x-captcha />
                                     <button type="submit" class="btn btn-primary"><i class="ph ph-paper-plane-right" aria-hidden="true"></i><span>ثبت دیدگاه</span></button>
                                 </div>
                                 <p data-form-msg class="form-msg" hidden aria-live="polite"></p>

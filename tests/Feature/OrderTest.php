@@ -29,7 +29,7 @@ class OrderTest extends TestCase
             'email' => 'sara@example.com',
             'contact_time' => 'morning',
             'consent' => '1',
-            'captcha' => 'abc12',
+            'captcha' => $this->captcha(),
         ], $over);
     }
 
@@ -46,7 +46,7 @@ class OrderTest extends TestCase
     {
         Mail::fake();
 
-        $res = $this->withSession($this->captcha())->postJson(route('order.store'), $this->payload())
+        $res = $this->postJson(route('order.store'), $this->payload())
             ->assertOk()->assertJson(['status' => 'success']);
 
         $order = Order::firstOrFail();
@@ -69,7 +69,7 @@ class OrderTest extends TestCase
 
     public function test_tracking_page_requires_code_and_token(): void
     {
-        $this->withSession($this->captcha())->postJson(route('order.store'), $this->payload());
+        $this->postJson(route('order.store'), $this->payload());
         $order = Order::firstOrFail();
 
         $this->get('/order/'.$order->code)->assertNotFound();
@@ -85,13 +85,13 @@ class OrderTest extends TestCase
 
     public function test_validation_rejects_bad_input(): void
     {
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('order.store'), $this->payload(['type' => 'nope', 'consent' => null, 'mobile' => '12']))
             ->assertStatus(422)
             ->assertJsonValidationErrors(['type', 'consent', 'mobile']);
 
         // feature that does not belong to the chosen type
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('order.store'), $this->payload(['type' => 'seo', 'features' => ['gateway']]))
             ->assertStatus(422)
             ->assertJsonValidationErrors(['features.0']);
@@ -103,7 +103,7 @@ class OrderTest extends TestCase
     {
         Storage::fake('local');
 
-        $this->withSession($this->captcha())
+        $this
             ->post(route('order.store'), $this->payload(['attachment' => UploadedFile::fake()->create('brief.pdf', 100, 'application/pdf')]), ['Accept' => 'application/json'])
             ->assertOk();
 
@@ -111,18 +111,18 @@ class OrderTest extends TestCase
         $this->assertSame('brief.pdf', $order->attachment_name);
         Storage::disk('local')->assertExists($order->attachment_path);
 
-        $this->withSession($this->captcha())
+        $this
             ->post(route('order.store'), $this->payload(['attachment' => UploadedFile::fake()->create('big.pdf', 6000, 'application/pdf')]), ['Accept' => 'application/json'])
             ->assertStatus(422)->assertJsonValidationErrors('attachment');
 
-        $this->withSession($this->captcha())
+        $this
             ->post(route('order.store'), $this->payload(['attachment' => UploadedFile::fake()->create('evil.php', 1, 'text/x-php')]), ['Accept' => 'application/json'])
             ->assertStatus(422)->assertJsonValidationErrors('attachment');
     }
 
     public function test_honeypot_creates_nothing(): void
     {
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('order.store'), $this->payload(['website' => 'spam']))->assertOk();
         $this->assertDatabaseCount('orders', 0);
         $this->assertDatabaseCount('leads', 0);
@@ -131,7 +131,7 @@ class OrderTest extends TestCase
     public function test_consultation_order_without_email_works(): void
     {
         Mail::fake();
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('order.store'), $this->payload(['type' => 'consult', 'features' => ['idea'], 'budget' => null, 'email' => null]))
             ->assertOk();
         $this->assertDatabaseHas('orders', ['type' => 'consult', 'email' => null]);
@@ -155,8 +155,8 @@ class OrderTest extends TestCase
 
     public function test_admin_can_list_filter_update_export_and_delete(): void
     {
-        $this->withSession($this->captcha())->postJson(route('order.store'), $this->payload());
-        $this->withSession($this->captcha())->postJson(route('order.store'), $this->payload(['type' => 'seo', 'features' => ['audit'], 'name' => 'نفر دوم']));
+        $this->postJson(route('order.store'), $this->payload());
+        $this->postJson(route('order.store'), $this->payload(['type' => 'seo', 'features' => ['audit'], 'name' => 'نفر دوم']));
         $order = Order::where('type', 'shop')->firstOrFail();
         $admin = $this->admin();
 

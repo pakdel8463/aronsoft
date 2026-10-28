@@ -20,7 +20,7 @@ class ContactTest extends TestCase
             'email' => 'Ali@Example.com',
             'subject' => 'مشاوره پروژه',
             'message' => 'سلام، می‌خواهم درباره طراحی سایت مشاوره بگیرم.',
-            'captcha' => 'abc12',
+            'captcha' => $this->captcha(),
         ], $over);
     }
 
@@ -37,7 +37,7 @@ class ContactTest extends TestCase
     {
         Mail::fake();
 
-        $this->withSession($this->captcha())
+        $this
             ->get('/?utm_source=google&utm_medium=cpc&utm_campaign=spring');
 
         $this->postJson(route('contact.store'), $this->payload())
@@ -56,7 +56,7 @@ class ContactTest extends TestCase
 
     public function test_validation_messages_are_persian(): void
     {
-        $res = $this->withSession($this->captcha())
+        $res = $this
             ->postJson(route('contact.store'), $this->payload(['mobile' => '123', 'message' => 'کوتاه', 'name' => '']))
             ->assertStatus(422);
 
@@ -67,7 +67,7 @@ class ContactTest extends TestCase
 
     public function test_wrong_captcha_is_rejected(): void
     {
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('contact.store'), $this->payload(['captcha' => 'nope']))
             ->assertStatus(422)
             ->assertJsonValidationErrors('captcha');
@@ -77,7 +77,7 @@ class ContactTest extends TestCase
     {
         Mail::fake();
 
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('contact.store'), $this->payload(['website' => 'http://spam.example']))
             ->assertOk();
 
@@ -89,7 +89,7 @@ class ContactTest extends TestCase
     {
         Mail::shouldReceive('to')->andThrow(new \RuntimeException('smtp down'));
 
-        $this->withSession($this->captcha())
+        $this
             ->postJson(route('contact.store'), $this->payload())
             ->assertOk()
             ->assertJson(['status' => 'success']);

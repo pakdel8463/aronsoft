@@ -5,7 +5,6 @@ Disallow: /register
 Disallow: /forgot-password
 Disallow: /dashboard
 Disallow: /profile
-Disallow: /aron-captcha
 Disallow: /order/
 Disallow: /invoice/
 Disallow: /newsletter/

@@ -1,5 +1,5 @@
 {{--
-    کپچای نامرئی (proof-of-work). داخل هر <form> بگذارید: <x-captcha />  — در کنترلر: 'captcha' => ['required', new \App\Captcha\CaptchaRule]
+    کپچای نامرئی (proof-of-work). داخل هر <form> بگذارید: <x-captcha />  — در کنترلر: 'captcha' => \App\Captcha\Captcha::rules()
     مرورگر معما را در پس‌زمینه حل می‌کند (public/js/captcha.js)؛ کاربر چیزی تایپ نمی‌کند.
     کلاس‌ها و آیکن‌هایی که اسکریپت تنظیم می‌کند (برای build تیلویند و زیرمجموعه‌ی آیکن‌ها):
     ph-circle-notch animate-spin ph-shield-check text-emerald-600 ph-warning-circle text-red-600

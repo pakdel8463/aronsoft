@@ -59,7 +59,7 @@
 | صفحه‌ی ۵۰۰ | `storage/logs/laravel.log` را ببینید؛ مجوز `storage` و `bootstrap/cache` (755/775) |
 | استایل‌ها نمی‌آیند | `public/build` داخل `public_html/build` کپی شده؟ دوباره `bash deploy/install.sh --yes` |
 | عکس‌های آپلودی نمایش داده نمی‌شوند | وجود `public_html/storage` (لینک یا پوشه) — اسکریپت می‌سازد |
-| `composer install` خطا می‌دهد | حافظه PHP ≥ 512M؛ پکیج خصوصی `aronlabs/captcha` باید در دسترس یا از قبل در `vendor/` باشد |
+| `composer install` خطا می‌دهد | حافظه PHP ≥ 512M |
 | بعد از تغییر `.env` تغییری دیده نمی‌شود | `php artisan config:clear` سپس `config:cache` |
 
 ## فایل‌های قدیمی پنل (`aron-legacy-admin-assets.zip`)

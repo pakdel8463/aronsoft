@@ -71,7 +71,7 @@ else
     else fail "composer not found and vendor/ missing. Install composer (https://getcomposer.org/download/) or upload vendor/ built with 'composer install --no-dev'."; fi
   else
     COMPOSER_ALLOW_SUPERUSER=1 $COMPOSER install --no-dev --optimize-autoloader --no-interaction --prefer-dist \
-      || fail "composer install failed (check memory_limit >= 512M; note: package aronlabs/captcha is a private dev-main package — it must be reachable or already in vendor/)."
+      || fail "composer install failed (check memory_limit >= 512M)."
     ok "composer install done"
   fi
 fi

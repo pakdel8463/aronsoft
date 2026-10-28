@@ -200,12 +200,6 @@
     .chip-filter { @apply inline-flex min-h-[44px] items-center rounded-full border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-600 transition-colors hover:border-brand-200 hover:text-tech-blue; }
     .chip-filter.is-active { @apply border-tech-blue bg-tech-blue text-white hover:text-white; }
 
-    /* ---------- کپچا (override پکیج aronlabs/captcha) ---------- */
-    .aron-captcha-field { @apply mb-3 flex flex-wrap items-center gap-2; }
-    .aron-captcha-field img { @apply h-11 w-auto shrink-0 cursor-pointer rounded-lg border border-slate-200 bg-white; }
-    .aron-captcha-field .form-input { @apply min-w-0 flex-1 basis-32 text-left; }
-    .aron-captcha-refresh { @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-lg text-slate-600 transition-colors hover:border-tech-blue hover:text-tech-blue; }
-    .aron-captcha-error { @apply basis-full text-xs text-red-600; }
 
     .toc-link { @apply block border-s-2 border-transparent py-1.5 ps-3 text-sm text-slate-600 transition-colors hover:text-tech-blue; }
     .toc-link.is-active { @apply border-tech-blue font-bold text-tech-blue; }

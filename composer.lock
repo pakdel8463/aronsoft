@@ -4,59 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f952005f2f05d60455301b2b5d7f3ae",
+    "content-hash": "f89b4ecfa7d7b631807d82e5ff785691",
     "packages": [
-        {
-            "name": "aronlabs/captcha",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "packages/aron-captcha",
-                "reference": null
-            },
-            "require": {
-                "ext-gd": "*",
-                "illuminate/support": "^10.0|^11.0|^12.0",
-                "php": "^8.1"
-            },
-            "default-branch": true,
-            "type": "laravel-package",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "AronCaptcha": "AronLabs\\Captcha\\Facades\\Captcha"
-                    },
-                    "providers": [
-                        "AronLabs\\Captcha\\CaptchaServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "AronLabs\\Captcha\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "M.Pakdel",
-                    "email": "pakdel8463@gmail.com"
-                }
-            ],
-            "description": "A customizable and secure Captcha package for Laravel.",
-            "support": {
-                "issues": "https://github.com/pakdel8463/aron-captcha/issues",
-                "source": "https://github.com/pakdel8463/aron-captcha/tree/main"
-            },
-            "time": "2025-12-16T09:56:52+00:00",
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
-        },
         {
             "name": "artesaos/seotools",
             "version": "v1.3.2",

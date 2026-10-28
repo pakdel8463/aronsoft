@@ -61,9 +61,9 @@ abstract class TestCase extends BaseTestCase
         return User::factory()->create(['is_superuser' => 1, 'is_staff' => 1]);
     }
 
-    /** session payload that makes the aronlabs captcha rule pass with value "abc12" */
-    protected function captcha(): array
+    /** a solved, single-use proof-of-work captcha answer (App\Captcha) */
+    protected function captcha(): string
     {
-        return ['aron_captcha_code' => 'abc12'];
+        return \App\Captcha\Captcha::solvedPayload();
     }
 }

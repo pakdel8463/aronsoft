@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Notifier;
 use App\Models\Comment;
 use App\Models\Post;
-use AronLabs\Captcha\Rules\CaptchaRule;
+use App\Captcha\Captcha;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -30,7 +30,7 @@ class CommentController extends Controller
             'name' => auth()->check() ? 'nullable' : 'required|string|max:255',
             'email' => auth()->check() ? 'nullable' : 'required|email|max:190',
             'parent_id' => ['nullable', Rule::exists('comments', 'id')->where('post_id', $post->id)],
-            'captcha' => ['required', new CaptchaRule],
+            'captcha' => Captcha::rules(),
         ]);
 
         $comment = new Comment();
