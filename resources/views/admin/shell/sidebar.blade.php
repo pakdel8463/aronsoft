@@ -17,9 +17,10 @@
 
     // cheap, cached badge counters
     $counts = \Illuminate\Support\Facades\Cache::remember('admin.nav.counts', 30, function () {
-        $c = ['leads' => 0, 'messages' => 0, 'comments' => 0, 'tickets' => 0];
+        $c = ['leads' => 0, 'messages' => 0, 'comments' => 0, 'tickets' => 0, 'entries' => 0];
         try { $c['leads'] = \App\Models\Lead::where('is_contacted', false)->count(); } catch (\Throwable $e) {}
         try { $c['messages'] = \App\Models\ContactMessage::where('status', 'new')->count(); } catch (\Throwable $e) {}
+        try { if (\Illuminate\Support\Facades\Schema::hasTable('form_entries')) $c['entries'] = \App\Models\FormEntry::where('status', 'new')->count(); } catch (\Throwable $e) {}
         try { $c['comments'] = \App\Models\Comment::where('status', 'pending')->count(); } catch (\Throwable $e) {}
         try {
             if (\Illuminate\Support\Facades\Schema::hasTable('tickets') && \Illuminate\Support\Facades\Schema::hasColumn('tickets', 'status')) {
@@ -43,12 +44,14 @@
             ['صفحه‌ساز', 'layout', 'panel.pages.index', 'panel.pages.*', ['pages.manage'], null],
             ['صفحات لندینگ', 'browser', 'panel.landing.index', 'panel.landing.*', null, null],
             ['لندینگ محصولات', 'rocket-launch', 'panel.product-pages.index', 'panel.product-pages.*', ['product-pages.manage'], null],
+            ['فرم‌ساز', 'list-checks', 'panel.forms.index', 'panel.forms.*', ['forms.manage'], null],
             ['منوها', 'list-bullets', 'panel.menus.index', 'panel.menus.*', ['menus-index'], null],
             ['رسانه', 'images', 'panel.media.index', 'panel.media.*', null, null],
             ['مدیریت فایل‌ها', 'folder-open', 'unisharp.lfm.show', 'unisharp.lfm.*', null, null],
         ]],
         ['title' => 'فروش و ارتباط', 'items' => [
             ['لیدها', 'target', 'panel.leads.index', 'panel.leads.*', ['leads-index'], 'leads'],
+            ['ورودی‌های فرم‌ها', 'tray', 'panel.form-entries.index', 'panel.form-entries.*', ['forms.entries'], 'entries'],
             ['پیام‌های تماس', 'envelope-simple', 'panel.contact-messages.index', 'panel.contact-messages.*', null, 'messages'],
             ['تیکت‌ها', 'lifebuoy', 'panel.tickets.index', 'panel.tickets.*', ['tickets.manage'], 'tickets'],
             ['سفارش‌ها', 'shopping-bag', 'panel.orders.index', 'panel.orders.*', null, null],

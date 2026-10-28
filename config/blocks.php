@@ -422,6 +422,25 @@ return [
         ],
     ],
 
+    'form' => [
+        'category' => 'cta',
+        'label' => 'فرم (از فرم‌ساز)',
+        'icon' => 'ph-list-checks',
+        'description' => 'یکی از فرم‌های فرم‌ساز با عنوان و توضیح؛ ورودی‌ها در پنل ثبت می‌شوند.',
+        'fields' => [
+            ...$head(),
+            ['key' => 'form', 'type' => 'form', 'label' => 'فرم', 'hint' => 'فرم‌ها در منوی «فرم‌ساز» ساخته می‌شوند.'],
+            ['key' => 'layout', 'type' => 'select', 'label' => 'چیدمان', 'options' => ['center' => 'وسط صفحه (عرض متوسط)', 'split' => 'دو ستون: متن کنار فرم'], 'default' => 'center', 'half' => true],
+            $alt,
+            ['key' => 'side_text', 'type' => 'editor', 'label' => 'متن کنار فرم (چیدمان دو ستون)'],
+        ],
+        'defaults' => [
+            'eyebrow' => 'تماس با ما', 'title' => 'فرم را پر کنید', 'description' => 'در کمتر از یک روز کاری پاسخ می‌دهیم.',
+            'form' => 0, 'layout' => 'center', 'alt' => false,
+            'side_text' => '<p>اطلاعات تماس یا توضیح بیشتر درباره‌ی این فرم را اینجا بنویسید.</p>',
+        ],
+    ],
+
     'newsletter' => [
         'category' => 'cta',
         'label' => 'عضویت در خبرنامه',

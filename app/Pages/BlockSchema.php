@@ -12,7 +12,7 @@ use App\Support\ProductPageSchema;
  */
 final class BlockSchema
 {
-    public const EXTRA_TYPES = ['editor', 'number', 'code'];
+    public const EXTRA_TYPES = ['editor', 'number', 'code', 'form'];
 
     /** قوانین اعتبارسنجی برای ورودی data[...] یک بلوک. */
     public static function rules(array $fields, string $prefix = 'data'): array
@@ -26,6 +26,9 @@ final class BlockSchema
                     break;
                 case 'code':
                     $rules[$path] = ['nullable', 'string', 'max:'.((int) ($f['max'] ?? 20000))];
+                    break;
+                case 'form':
+                    $rules[$path] = ['nullable', 'integer'];
                     break;
                 case 'number':
                     $rules[$path] = array_values(array_filter(['nullable', 'integer',
@@ -72,6 +75,7 @@ final class BlockSchema
             'editor' => HtmlSanitizer::clean(is_string($v) ? $v : '', false),
             'code' => is_string($v) ? trim(str_replace("\0", '', $v)) : '',
             'number' => self::number($v, $f),
+            'form' => is_numeric($v) && \App\Models\Form::whereKey((int) $v)->exists() ? (int) $v : 0,
             default => ProductPageSchema::cleanValue($v, $f),
         };
     }

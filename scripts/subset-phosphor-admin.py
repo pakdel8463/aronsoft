@@ -11,7 +11,7 @@ root = pathlib.Path(__file__).resolve().parent.parent
 full = (root / 'resources/vendor/phosphor.full.css').read_text()
 rule = re.compile(r'\.(ph|ph-bold|ph-fill)\.(ph-[a-z0-9-]+):before\{content:"[^"]+";\}')
 names = {m.group(2)[3:] for m in rule.finditer(full)}
-scan = ['resources/views/components/admin', 'resources/views/admin', 'resources/js/admin', 'app/Http/Controllers/Admin', 'config']
+scan = ['resources/views/components/admin', 'resources/views/admin', 'resources/js/admin', 'public/js/admin', 'app/Http/Controllers/Admin', 'app/Forms', 'app/Pages', 'config']
 used = set()
 for d in scan:
     for f in (root / d).rglob('*'):

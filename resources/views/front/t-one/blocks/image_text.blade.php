@@ -4,7 +4,7 @@
         <div class="reveal {{ $img && $s['image_side'] === 'start' ? 'lg:order-2' : '' }}">
             @if ($s['eyebrow'] !== '')<span class="eyebrow">{{ $s['eyebrow'] }}</span>@endif
             @if ($s['title'] !== '')<h2 id="{{ $anchor }}-title" class="h2-section">{{ $s['title'] }}</h2>@endif
-            @if (trim(strip_tags($s['body'])) !== '')<div class="rich mt-4">{!! $s['body'] !!}</div>@endif
+            @if (trim(strip_tags($s['body'])) !== '')<div class="rich mt-4">{!! \App\Forms\Shortcodes::render($s['body']) !!}</div>@endif
             @if (! empty($s['checklist']))
                 <ul class="check-list mt-5 space-y-1">
                     @foreach ($s['checklist'] as $item)<li>{{ $item }}</li>@endforeach

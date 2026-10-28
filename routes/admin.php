@@ -251,3 +251,25 @@ Route::middleware('can:pages.manage')->group(function () {
     Route::post('pages/{page}/blocks/{block}/duplicate', [$builder, 'duplicate'])->whereNumber(['page', 'block'])->name('pages.blocks.duplicate');
     Route::delete('pages/{page}/blocks/{block}', [$builder, 'destroy'])->whereNumber(['page', 'block'])->name('pages.blocks.destroy');
 });
+
+// ---- فرم‌ساز — دسترسی: forms.manage (فرم‌ها) و forms.entries (ورودی‌ها) ----
+Route::middleware('can:forms.manage')->group(function () {
+    $forms = \App\Http\Controllers\Admin\FormController::class;
+    Route::get('forms', [$forms, 'index'])->name('forms.index');
+    Route::post('forms', [$forms, 'store'])->name('forms.store');
+    Route::get('forms/{form}/edit', [$forms, 'edit'])->whereNumber('form')->name('forms.edit');
+    Route::put('forms/{form}', [$forms, 'update'])->whereNumber('form')->name('forms.update');
+    Route::post('forms/{form}/duplicate', [$forms, 'duplicate'])->whereNumber('form')->name('forms.duplicate');
+    Route::get('forms/{form}/preview', [$forms, 'preview'])->whereNumber('form')->name('forms.preview');
+    Route::delete('forms/{form}', [$forms, 'destroy'])->whereNumber('form')->name('forms.destroy');
+});
+Route::middleware('can:forms.entries')->group(function () {
+    $entries = \App\Http\Controllers\Admin\FormEntryController::class;
+    Route::get('form-entries', [$entries, 'index'])->name('form-entries.index');
+    Route::get('form-entries/export', [$entries, 'export'])->name('form-entries.export');
+    Route::post('form-entries/bulk', [$entries, 'bulk'])->name('form-entries.bulk');
+    Route::get('form-entries/{entry}', [$entries, 'show'])->whereNumber('entry')->name('form-entries.show');
+    Route::patch('form-entries/{entry}', [$entries, 'update'])->whereNumber('entry')->name('form-entries.update');
+    Route::delete('form-entries/{entry}', [$entries, 'destroy'])->whereNumber('entry')->name('form-entries.destroy');
+    Route::get('form-entries/{entry}/files/{key}', [$entries, 'file'])->whereNumber('entry')->where('key', '[a-z0-9_]+')->name('form-entries.file');
+});
