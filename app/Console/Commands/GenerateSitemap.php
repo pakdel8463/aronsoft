@@ -75,6 +75,11 @@ class GenerateSitemap extends Command
                 $add(route('landing.show', $landing->slug), $landing->updated_at, Url::CHANGE_FREQUENCY_MONTHLY, 0.8);
             });
 
+            // ---- صفحه‌ساز (منتشرشده، بدون noindex؛ صفحه‌ی اصلی همان / است) ----
+            \App\Models\Page::published()->where('is_home', false)->orderBy('id')->get()
+                ->reject(fn ($p) => (bool) $p->setting('noindex'))
+                ->each(fn ($p) => $add($p->url(), $p->updated_at, Url::CHANGE_FREQUENCY_MONTHLY, 0.7));
+
             // ---- blog ----
             Post::published()->whereNotNull('slug')->where('slug', '!=', '')
                 ->orderBy('id')->cursor()

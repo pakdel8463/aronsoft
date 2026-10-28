@@ -1,0 +1,30 @@
+# صفحه‌ساز
+
+پنل: **صفحه‌ساز** در منوی «محتوا» (`/panel/pages`). دسترسی: `pages.manage` (مدیر کل همیشه دسترسی دارد).
+
+## مفاهیم
+
+- **صفحه** از چند **بلوک** ساخته می‌شود و در آدرس `/{آدرس-صفحه}` نمایش داده می‌شود. این مسیر با `Route::fallback` ثبت شده، پس هیچ مسیر موجود سایت (`/blog`، `/services/...`، `/panel` و ...) را نمی‌پوشاند. پنل هم اجازه‌ی آدرس‌هایی که خود سایت استفاده می‌کند را نمی‌دهد.
+- صفحه تا وقتی «منتشر» نشده، فقط با **پیش‌نمایش** برای مدیران دیده می‌شود.
+- **صفحه‌ی اصلی:** هر صفحه را می‌شود «صفحه‌ی اصلی سایت» کرد. آن‌وقت به‌جای صفحه‌ی اصلی ثابت (`front/t-one/home.blade.php`) نمایش داده می‌شود، و با برداشتنش صفحه‌ی ثابت برمی‌گردد.
+- **قالب‌ها:** صفحه‌هایی با `is_template` که صفحه‌ی جدید از روی آن‌ها ساخته می‌شود. قالب‌های اولیه از `config/page_templates.php` موقع مایگریشن ساخته می‌شوند. هر صفحه‌ای را هم می‌شود «به‌عنوان قالب» ذخیره کرد.
+
+## افزودن نوع بلوک جدید
+
+1. در `config/blocks.php` تعریفش کنید: `category`، `label`، `icon` (نام Phosphor)، `description`، `fields` و `defaults`. هر فیلد در `defaults` مقدار داشته باشد. کلید گزینه‌های `select` عدد نباشد.
+2. نمای سایت را در `resources/views/front/t-one/blocks/{type}.blade.php` بسازید. متغیرها: `$s` (محتوای ادغام‌شده با پیش‌فرض‌ها)، `$block`، `$anchor` (شناسه‌ی HTML)، `$page`، `$first` (اولین بلوک صفحه؛ برای H1)، `$preview`.
+3. اگر آیکن جدیدی استفاده کردید، `python3 scripts/subset-phosphor.py` و `python3 scripts/subset-phosphor-admin.py` را اجرا کنید.
+
+نوع فیلدها: `text`، `textarea`، `lines` (هر خط یک مورد)، `editor`، `url`، `image`، `icon`، `select`، `toggle`، `number`، `code`، `repeater`. پاک‌سازی و اعتبارسنجی در `App\Pages\BlockSchema` است (نوع‌های مشترک با ویرایشگر صفحات محصول، `ProductPageSchema`).
+
+## فایل‌ها
+
+| مسیر | توضیح |
+|---|---|
+| `app/Pages/PageBuilder.php` | ساخت صفحه/بلوک، قالب‌ها، آدرس‌های رزرو |
+| `app/Pages/BlockSchema.php` | اعتبارسنجی و پاک‌سازی محتوای بلوک |
+| `app/Http/Controllers/Admin/PageController.php`، `PageBuilderController.php` | پنل |
+| `app/Http/Controllers/PageController.php` | نمایش در سایت (fallback) و پیش‌نمایش |
+| `resources/views/admin/dash/pages/` | نماهای پنل |
+| `public/js/admin/page-builder.js`، `public/css/admin/page-builder.css` | رابط صفحه‌ساز (بدون نیاز به build) |
+| `tests/Feature/PageBuilderTest.php` | تست‌ها |

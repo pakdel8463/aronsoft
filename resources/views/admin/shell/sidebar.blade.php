@@ -40,6 +40,7 @@
             ['برچسب‌ها', 'tag', 'panel.tags.index', 'panel.tags.*', null, null],
             ['دیدگاه‌ها', 'chat-centered-text', 'panel.comments.index', 'panel.comments.*', ['comments-index'], 'comments'],
             ['نمونه‌کارها', 'briefcase', 'panel.portfolios.index', 'panel.portfolios.*', null, null],
+            ['صفحه‌ساز', 'layout', 'panel.pages.index', 'panel.pages.*', ['pages.manage'], null],
             ['صفحات لندینگ', 'browser', 'panel.landing.index', 'panel.landing.*', null, null],
             ['لندینگ محصولات', 'rocket-launch', 'panel.product-pages.index', 'panel.product-pages.*', ['product-pages.manage'], null],
             ['منوها', 'list-bullets', 'panel.menus.index', 'panel.menus.*', ['menus-index'], null],
